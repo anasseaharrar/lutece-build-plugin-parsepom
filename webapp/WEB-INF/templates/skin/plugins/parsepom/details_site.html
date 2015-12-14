@@ -1,5 +1,6 @@
 <div class="row">
   	<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+  		<a href="#" id="backLink" class="btn btn-warning" role="button">#i18n{parsepom.util.labelPrevious}</a>
   		<a href="jsp/site/Portal.jsp?page=parsepom" class="btn btn-warning" role="button">#i18n{parsepom.util.labelHome}</a>
   		<br /><br />
   		<@messages errors=errors />
@@ -109,12 +110,12 @@
 								<#assign nbWithoutSS = "${d}"?number - "${s}"?number>
 								<#assign ratioWithoutSS = nbWithoutSS / "${d}"?number * 100>
 								<#assign finalMark = (ratioWithoutSS / 10)?round>
-								<td>#i18n{parsepom.details_site.fieldNbSnapshots}</td>
-								<td>${s} (${ratioSS?round}%)</td>
+								<td id="last_row">#i18n{parsepom.details_site.fieldNbSnapshots}</td>
+								<td id="last_row">${s} (${ratioSS?round}%)</td>
 							</tr>
 							<tr>
-								<td>#i18n{parsepom.details_site.fieldLastUpdate}</td>
-								<td>
+								<td id="last_row">#i18n{parsepom.details_site.fieldLastUpdate}</td>
+								<td id="last_row">
 									<#if "${last_update_time_interval}"?number == 0>
 										<#assign finalMark = finalMark + 10>
 										#i18n{parsepom.details_site.fieldDate1}
@@ -143,7 +144,7 @@
 									</#if>
 								</td>
 							</tr>
-							<tr>
+							<!--  <tr>
 								<td id="last_row">#i18n{parsepom.details_site.fieldMark}</td>
 								<#if finalMark gt 20>
 									<#assign finalMark = 20>
@@ -152,10 +153,10 @@
 									<#assign finalMark = 0>
 								</#if>
 								<td id="last_row">${finalMark} / 20</td>
-							</tr>
+							</tr>-->
 						</tbody>
 					</table>
-					<br /><br />
+					<br /><br /><br />
 					<a href="jsp/site/Portal.jsp?page=site&action=downloadPom&id=${site.id}" class="btn btn-success btn-block" role="button"><font color="white">#i18n{parsepom.details_site.downloadPom}</font></a>
 				</div>
 			</div>
@@ -192,6 +193,7 @@
             	</div>
    			</table>
    		</div>
+   		<a href="#" id="backLink" class="btn btn-warning" role="button">#i18n{parsepom.util.labelPrevious}</a>
   		<a href="jsp/site/Portal.jsp?page=parsepom" class="btn btn-warning" role="button">#i18n{parsepom.util.labelHome}</a>
   	</div>
 </div>

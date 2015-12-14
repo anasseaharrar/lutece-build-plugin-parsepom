@@ -31,6 +31,7 @@ $(document).ready(function() {
 	autoComplete( );
 	datePicker( );
 	updateLoader( );
+	backLink( );
 })
 
 function handleHeaderClick( hdr ) {
@@ -152,4 +153,17 @@ function updateLoader( )
 		$( '#imgLoader2' ).show( );
 		$( '#buttonLoader2' ).hide( );
 	})
+}
+
+function backLink( )
+{
+	$( "#backLink1" ).click( function( event ) {
+	    event.preventDefault( );
+	    history.back( 1 );
+	});
+	
+	$( "#backLink2" ).click( function( event ) {
+	    event.preventDefault( );
+	    history.back( 1 );
+	});
 }

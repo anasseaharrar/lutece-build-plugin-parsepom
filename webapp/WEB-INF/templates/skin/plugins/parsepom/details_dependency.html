@@ -1,5 +1,6 @@
 <div class="row">
   	<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+  		<a href="#" id="backLink1" class="btn btn-warning" role="button">#i18n{parsepom.util.labelPrevious}</a>
   		<a href="jsp/site/Portal.jsp?page=parsepom" class="btn btn-warning" role="button">#i18n{parsepom.util.labelHome}</a>
   		<br /><br />
   		<div class="panel panel-info">
@@ -105,11 +106,13 @@
 				<br />
 				</div>
 				<div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
-					<p>Plus d'informations Sonar ? Accédez aux données complètes pour ce plugin en cliquant ici :</p>
-					<#if "${dependency.artifactId}" == "lutece-core">
-						<p><a href="http://dev.lutece.paris.fr/sonar/dashboard/index/fr.paris.lutece:${dependency.artifactId}">click</a></p>
+					<p><font size="3">#i18n{parsepom.details_dependency.textRedirect}</font></p>
+					<#if sonar_data?has_content == false>
+						<p><em><font color="#337AB7">#i18n{parsepom.details_dependency.htmlNotFound}</font></em></p>
+					<#elseif "${dependency.artifactId}" == "lutece-core">
+						<a href="http://dev.lutece.paris.fr/sonar/dashboard/index/fr.paris.lutece:${dependency.artifactId}" class="btn btn-success" role="button"><span class="glyphicon glyphicon-globe"></span> #i18n{parsepom.details_dependency.htmlGo}</a>
 					<#else>
-						<p><a href="http://dev.lutece.paris.fr/sonar/dashboard/index/fr.paris.lutece.plugins:${dependency.artifactId}">click</a></p>
+						<a href="http://dev.lutece.paris.fr/sonar/dashboard/index/fr.paris.lutece.plugins:${dependency.artifactId}" class="btn btn-success" role="button"><span class="glyphicon glyphicon-globe"></span> #i18n{parsepom.details_dependency.htmlGo}</a>
 					</#if>
 				</div>
    			</div>
@@ -146,6 +149,7 @@
             	</tbody>
    			</table>
   		</div>
+  		<a href="#" id="backLink2" class="btn btn-warning" role="button">#i18n{parsepom.util.labelPrevious}</a>
   		<a href="jsp/site/Portal.jsp?page=parsepom" class="btn btn-warning" role="button">#i18n{parsepom.util.labelHome}</a>
   	</div>
 </div>
