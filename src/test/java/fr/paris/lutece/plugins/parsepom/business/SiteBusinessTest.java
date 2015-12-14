@@ -39,28 +39,58 @@ import fr.paris.lutece.test.LuteceTestCase;
 
 public class SiteBusinessTest extends LuteceTestCase
 {
+    private final static String ARTIFACTID1 = "ArtifactId1";
+    private final static String ARTIFACTID2 = "ArtifactId2";
     private final static String NAME1 = "Name1";
     private final static String NAME2 = "Name2";
+    private final static String VERSION1 = "Version1";
+    private final static String VERSION2 = "Version2";
+    private final static String IDPLUGINS1 = "IdPLugins1";
+    private final static String IDPLUGINS2 = "IdPLugins2";
+    private final static String LASTUPDATE1 = "LastUpdate1";
+    private final static String LASTUPDATE2 = "LastUpdate2";
+    private final static String PATH1 = "Path1";
+    private final static String PATH2 = "Path2";
 
     public void testBusiness(  )
     {
         // Initialize an object
         Site site = new Site();
+        site.setArtifactId( ARTIFACTID1 );
         site.setName( NAME1 );
+        site.setVersion( VERSION1 );
+        site.setIdPlugins( IDPLUGINS1 );
+        site.setLastUpdate( LASTUPDATE1 );
+        site.setPath( PATH1 );
 
         // Create test
         SiteHome.create( site );
         Site siteStored = SiteHome.findByPrimaryKey( site.getId( ) );
-        assertEquals( siteStored.getName() , site.getName( ) );
+        assertEquals( siteStored.getArtifactId( ) , site.getArtifactId( ) );
+        assertEquals( siteStored.getName( ) , site.getName( ) );
+        assertEquals( siteStored.getVersion( ) , site.getVersion( ) );
+        assertEquals( siteStored.getIdPlugins( ) , site.getIdPlugins( ) );
+        assertEquals( siteStored.getLastUpdate( ) , site.getLastUpdate( ) );
+        assertEquals( siteStored.getPath( ) , site.getPath( ) );
 
         // Update test
+        site.setArtifactId( ARTIFACTID2 );
         site.setName( NAME2 );
+        site.setVersion( VERSION2 );
+        site.setIdPlugins( IDPLUGINS2 );
+        site.setLastUpdate( LASTUPDATE2 );
+        site.setPath( PATH2 );
         SiteHome.update( site );
         siteStored = SiteHome.findByPrimaryKey( site.getId( ) );
-        assertEquals( siteStored.getName() , site.getName( ) );
+        assertEquals( siteStored.getArtifactId( ) , site.getArtifactId( ) );
+        assertEquals( siteStored.getName( ) , site.getName( ) );
+        assertEquals( siteStored.getVersion( ) , site.getVersion( ) );
+        assertEquals( siteStored.getIdPlugins( ) , site.getIdPlugins( ) );
+        assertEquals( siteStored.getLastUpdate( ) , site.getLastUpdate( ) );
+        assertEquals( siteStored.getPath( ) , site.getPath( ) );
 
         // List test
-        SiteHome.getSitesList();
+        SiteHome.getSitesList( );
 
         // Delete test
         SiteHome.remove( site.getId( ) );

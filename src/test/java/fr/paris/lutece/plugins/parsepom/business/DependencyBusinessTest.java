@@ -63,11 +63,11 @@ public class DependencyBusinessTest extends LuteceTestCase
         // Create test
         DependencyHome.create( dependency );
         Dependency dependencyStored = DependencyHome.findByPrimaryKey( dependency.getId( ) );
-        assertEquals( dependencyStored.getGroupId() , dependency.getGroupId( ) );
-        assertEquals( dependencyStored.getArtifactId() , dependency.getArtifactId( ) );
-        assertEquals( dependencyStored.getVersion() , dependency.getVersion( ) );
-        assertEquals( dependencyStored.getType() , dependency.getType( ) );
-        assertEquals( dependencyStored.getSiteId() , dependency.getSiteId( ) );
+        assertEquals( dependencyStored.getGroupId( ) , dependency.getGroupId( ) );
+        assertEquals( dependencyStored.getArtifactId( ) , dependency.getArtifactId( ) );
+        assertEquals( dependencyStored.getVersion( ) , dependency.getVersion( ) );
+        assertEquals( dependencyStored.getType( ) , dependency.getType( ) );
+        assertEquals( dependencyStored.getSiteId( ) , dependency.getSiteId( ) );
 
         // Update test
         dependency.setGroupId( GROUPID2 );
@@ -77,14 +77,14 @@ public class DependencyBusinessTest extends LuteceTestCase
         dependency.setSiteId( SITEID2 );
         DependencyHome.update( dependency );
         dependencyStored = DependencyHome.findByPrimaryKey( dependency.getId( ) );
-        assertEquals( dependencyStored.getGroupId() , dependency.getGroupId( ) );
-        assertEquals( dependencyStored.getArtifactId() , dependency.getArtifactId( ) );
-        assertEquals( dependencyStored.getVersion() , dependency.getVersion( ) );
-        assertEquals( dependencyStored.getType() , dependency.getType( ) );
-        assertEquals( dependencyStored.getSiteId() , dependency.getSiteId( ) );
+        assertEquals( dependencyStored.getGroupId( ) , dependency.getGroupId( ) );
+        assertEquals( dependencyStored.getArtifactId( ) , dependency.getArtifactId( ) );
+        assertEquals( dependencyStored.getVersion( ) , dependency.getVersion( ) );
+        assertEquals( dependencyStored.getType( ) , dependency.getType( ) );
+        assertEquals( dependencyStored.getSiteId( ) , dependency.getSiteId( ) );
 
         // List test
-        DependencyHome.getDependencysList();
+        DependencyHome.getDependencysList( );
 
         // Delete test
         DependencyHome.remove( dependency.getId( ) );
