@@ -8,6 +8,7 @@
      			<h3 class="panel-title">${dependency.artifactId}</h3>
    			</div>
    			<div class="panel-body">
+   				<br />
    				<div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
 	                <table class="table_stats">
 		                <thead>
@@ -106,14 +107,16 @@
 				<br />
 				</div>
 				<div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
-					<p><font size="3">#i18n{parsepom.details_dependency.textRedirect}</font></p>
-					<#if sonar_data?has_content == false>
-						<p><em><font color="#337AB7">#i18n{parsepom.details_dependency.htmlNotFound}</font></em></p>
-					<#elseif "${dependency.artifactId}" == "lutece-core">
-						<a href="http://dev.lutece.paris.fr/sonar/dashboard/index/fr.paris.lutece:${dependency.artifactId}" class="btn btn-success" role="button"><span class="glyphicon glyphicon-globe"></span> #i18n{parsepom.details_dependency.htmlGo}</a>
-					<#else>
-						<a href="http://dev.lutece.paris.fr/sonar/dashboard/index/fr.paris.lutece.plugins:${dependency.artifactId}" class="btn btn-success" role="button"><span class="glyphicon glyphicon-globe"></span> #i18n{parsepom.details_dependency.htmlGo}</a>
-					</#if>
+					<div class="myBorder">
+						<p><font size="3">#i18n{parsepom.details_dependency.textRedirect}</font></p>
+						<#if sonar_data?has_content == false>
+							<p><em><font color="#337AB7">#i18n{parsepom.details_dependency.htmlNotFound}</font></em></p>
+						<#elseif "${dependency.artifactId}" == "lutece-core">
+							<a href="http://dev.lutece.paris.fr/sonar/dashboard/index/fr.paris.lutece:${dependency.artifactId}" class="btn btn-success btn-block" role="button"><span class="glyphicon glyphicon-globe"></span> #i18n{parsepom.details_dependency.htmlGo}</a>
+						<#else>
+							<a href="http://dev.lutece.paris.fr/sonar/dashboard/index/fr.paris.lutece.plugins:${dependency.artifactId}" class="btn btn-success btn-block" role="button"><span class="glyphicon glyphicon-globe"></span> #i18n{parsepom.details_dependency.htmlGo}</a>
+						</#if>
+					</div>
 				</div>
    			</div>
    			<table id="myTableDependency" class="table">

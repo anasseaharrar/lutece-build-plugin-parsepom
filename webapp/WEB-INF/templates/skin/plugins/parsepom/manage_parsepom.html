@@ -10,7 +10,7 @@
             <form method="post" class="form-inline" role="form" action="jsp/site/Portal.jsp?page=parsepom">
 		  		<div class="form-group has-success has-feedback">
 		    		<label for="path"></label>
-		    		<input type="text" class="form-control" name="path" value="${path!}" placeholder="/home/user/site" 
+		    		<input type="text" class="form-control" name="path" value="${path!}" placeholder="#i18n{parsepom.manage_parsepom.placeholder}"
 		    			<#if path?has_content == false>disabled</#if> >
 		    		<#if path?has_content>
 		    			<span class="glyphicon glyphicon-ok form-control-feedback"></span>

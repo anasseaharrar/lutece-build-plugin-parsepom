@@ -31,7 +31,7 @@ img.thumblist-large{width:128px;height:128px;}
 .panel-info > .panel-heading{color:#000000;background-color:#BDB76B;background-image:none;border-color:#BDB76B;}
 .panel-info{border-color:#BDB76B;}
 
-/* lists style */
+/* list style */
 table .hover_tr:nth-child(odd){background:#EEEEEE;}
 .hover_tr:hover{background:#D0D0D0 !important;}
 td a{display:block;color:black;}
@@ -41,6 +41,7 @@ td a:hover{text-decoration:none;color:black;}
 /* p style */
 .p_description{text-align:justify;height:160px;}
 
+/* table style */
 .table_stats{width:100%;}
 .table_stats th{border:1px solid black;padding:2px;background:#ebebe0;}
 .table_stats th:nth-child(2){text-align:center;}
@@ -51,3 +52,6 @@ td a:hover{text-decoration:none;color:black;}
 /* button style */
 #margin_button{margin-right:1px;}
 #pullright_button{margin-top:-6px;}
+
+/* border style */
+.myBorder{border:1px solid black;padding:30px;background:#ebebe0;border-radius:15px;}
