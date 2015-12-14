@@ -1,0 +1,143 @@
+<div class="row">
+  	<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+  		<a href="jsp/site/Portal.jsp?page=parsepom" class="btn btn-warning" role="button">#i18n{parsepom.util.labelHome}</a>
+  		<br /><br />
+  		<div class="panel panel-info">
+  			<div class="panel-heading">
+     			<h3 class="panel-title">${dependency.artifactId}</h3>
+   			</div>
+   			<div class="panel-body">
+   				<div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+	                <table class="table_stats">
+		                <thead>
+							<tr >        
+								<th>#i18n{parsepom.details_dependency.fieldSonarPluginInfo}</th>
+							</tr>
+						</thead>
+		   				<tbody>
+							<tr>
+								<td id="last_row">#i18n{parsepom.details_dependency.fieldNbLineCode}</td>
+								<#if sonar_data?has_content>
+									<#assign exist = 0>
+									<#list sonar_data?keys as k>
+										<#if "${k}" == "ncloc">
+											<td id="last_row">${sonar_data[k]}</td>
+											<#assign exist = 1>
+										</#if>
+									</#list>
+									<#if exist = 0>
+										<td id="last_row">#i18n{parsepom.error.metric.notFound}</td>
+									</#if>
+								<#else>
+									<td id="last_row">#i18n{parsepom.error.metric.notFound}</td>
+								</#if>
+							</tr>
+							<tr>
+								<td id="last_row">#i18n{parsepom.details_dependency.fieldNbFile}</td>
+								<#if sonar_data?has_content>
+									<#assign exist = 0>
+									<#list sonar_data?keys as k>
+										<#if "${k}" == "files">
+											<td id="last_row">${sonar_data[k]}</td>
+											<#assign exist = 1>
+										</#if>
+									</#list>
+									<#if exist = 0>
+										<td id="last_row">#i18n{parsepom.error.metric.notFound}</td>
+									</#if>
+								<#else>
+									<td id="last_row">#i18n{parsepom.error.metric.notFound}</td>
+								</#if>
+							</tr>
+							<tr>
+								<td id="last_row">#i18n{parsepom.details_dependency.fieldUnitTestCoverage}</td>
+								<#if sonar_data?has_content>
+									<#assign exist = 0>
+									<#list sonar_data?keys as k>
+										<#if "${k}" == "coverage">
+											<td id="last_row">${sonar_data[k]}</td>
+											<#assign exist = 1>
+										</#if>
+									</#list>
+									<#if exist = 0>
+										<td id="last_row">#i18n{parsepom.error.metric.notFound}</td>
+									</#if>
+								<#else>
+									<td id="last_row">#i18n{parsepom.error.metric.notFound}</td>
+								</#if>
+							</tr>
+							<tr>
+								<td id="last_row">#i18n{parsepom.details_dependency.fieldUnitTestSuccess}</td>
+								<#if sonar_data?has_content>
+									<#assign exist = 0>
+									<#list sonar_data?keys as k>
+										<#if "${k}" == "test_success_density">
+											<td id="last_row">${sonar_data[k]}</td>
+											<#assign exist = 1>
+										</#if>
+									</#list>
+									<#if exist = 0>
+										<td id="last_row">#i18n{parsepom.error.metric.notFound}</td>
+									</#if>
+								<#else>
+									<td id="last_row">#i18n{parsepom.error.metric.notFound}</td>
+								</#if>
+							</tr>
+							<tr>
+								<td id="last_row">#i18n{parsepom.details_dependency.fieldViolations}</td>
+								<#if sonar_data?has_content>
+									<#assign exist = 0>
+									<#list sonar_data?keys as k>
+										<#if "${k}" == "violations">
+											<td id="last_row">${sonar_data[k]}</td>
+											<#assign exist = 1>
+										</#if>
+									</#list>
+									<#if exist = 0>
+										<td id="last_row">#i18n{parsepom.error.metric.notFound}</td>
+									</#if>
+								<#else>
+									<td id="last_row">#i18n{parsepom.error.metric.notFound}</td>
+								</#if>
+							</tr>
+						</tbody>
+					</table>
+				<br />
+				</div>
+   			</div>
+   			<table id="myTableDependency" class="table">
+   				<thead>
+	                <tr>
+	                    <th id="first">#i18n{parsepom.details_dependency.columnSite} ${dependency.artifactId}</th>
+	                    <th id="second">#i18n{parsepom.details_dependency.columnDependencyVersion}</th>
+	                    <th id="third">#i18n{parsepom.details_dependency.columnLatestRelease}</th>
+	                </tr>
+	            </thead>
+	            <tbody>
+					<#list sites_list_by_dependency?keys as key>
+						<tr class="hover_tr">
+							<td><a href="jsp/site/Portal.jsp?page=site&view=detailsSite&id=${sites_list_by_dependency[key][0]}">
+								<#assign j = 0>
+								<#list sites_list_by_dependency[key] as k>			
+									<#if j == 1>	
+										${k}
+									<#elseif j == 2>
+										<font size="2">(${k})</font>
+									</#if>
+									<#assign j = j + 1>
+								</#list>
+							</a></td>
+							<td><a href="jsp/site/Portal.jsp?page=site&view=detailsSite&id=${sites_list_by_dependency[key][0]}">${key}</a></td>
+							<#if last_release?has_content>
+			                    <td><a href="jsp/site/Portal.jsp?page=site&view=detailsSite&id=${sites_list_by_dependency[key][0]}">${last_release}</a></td>
+			                <#else>
+		                    	<td>#i18n{parsepom.details_dependency.nonAvailable}</td>
+		                   	</#if> 
+						</tr>
+					</#list>
+            	</tbody>
+   			</table>
+  		</div>
+  		<a href="jsp/site/Portal.jsp?page=parsepom" class="btn btn-warning" role="button">#i18n{parsepom.util.labelHome}</a>
+  	</div>
+</div>

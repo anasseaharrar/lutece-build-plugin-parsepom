@@ -1,0 +1,83 @@
+
+<div class="row">
+	<div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+		<div class="panel panel-info">
+			<div class="panel-heading">
+				<#assign i = 0>
+				<#assign j = 0>
+				<#list all! as a>
+					<#assign i = i + 1>
+				</#list>
+				<#list conflict! as con>
+					<#assign j = j + 1>
+				</#list>
+				<#assign i = i - j>
+				<#if i lt 0>
+					<#assign i = 0>
+				</#if>
+				<h3 class="panel-title">#i18n{parsepom.validate_parse.titleNew} (${i})</h3>
+			</div>
+			<ul class="list-group">
+				<#assign notEmpty = 0>
+				<#assign isNew = 0>
+ 				<#list all! as a>
+	 	 			<#assign isConflict = 0>
+					<#list conflict! as con>
+						<#if "${con.artifactId}" == "${a.artifactId}">
+							<#assign isConflict = 1>
+							<#assign notEmpty = 1>
+						</#if>
+					</#list>
+					<#if isConflict == 0 >
+						<#assign isNew = 1>
+						<li class="list-group-item">${a.artifactId} <font size="2">(${a.name}) - v${a.version}</font></li>
+					</#if>
+				</#list>
+				<#if all?has_content && isNew == 1>
+				<#else>
+					<li class="list-group-item"><em>#i18n{parsepom.validate_parse.fieldNone}</em></li>
+				</#if>
+			</ul>
+		</div>
+	</div>
+	<div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+		<div class="panel panel-danger">
+			<div class="panel-heading">
+				<#assign i = 0>
+				<#list conflict! as con>
+					<#assign i = i + 1>
+				</#list>
+				<h3 class="panel-title">#i18n{parsepom.validate_parse.titleConflict} (${i})</h3>
+			</div>
+			<ul class="list-group">
+				<#if conflict?has_content >
+					<#list conflict! as con>
+						<li class="list-group-item">${con.artifactId} <font size="2">(${con.name}) - #i18n{parsepom.validate_parse.lastUpdate} : <em>${con.lastUpdate}</em></font></li>
+					</#list>
+				<#else>
+					<li class="list-group-item"><em>#i18n{parsepom.validate_parse.fieldNone}</em></li>
+				</#if>
+			</ul>
+		</div>
+		<#if conflict?has_content >
+			<p><font color="red">#i18n{parsepom.validate_parse.warning} : 
+			<#list conflict as con>
+				[${con.artifactId}]
+			</#list>
+			#i18n{parsepom.validate_parse.warningMessage} !</font></p>
+		</#if>
+	</div>
+	<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+		<form method="post" action="jsp/site/Portal.jsp?page=parsepom">	
+			<button id="buttonLoader" name="action_validate" class="btn btn-success" type="submit">
+				<span class="glyphicon glyphicon-ok"></span> 
+				#i18n{parsepom.validate_parse.validate}
+			</button>
+		 	<button name="action_clean" class="btn btn-danger" type="submit">
+				<span class="glyphicon glyphicon-ban-circle"></span> 
+				#i18n{parsepom.validate_parse.cancel}
+			</button>
+			<img src="css/img/ajax-loader3.gif" id="imgLoader" style="display:none" />
+		</form>
+	</div>
+</div>
