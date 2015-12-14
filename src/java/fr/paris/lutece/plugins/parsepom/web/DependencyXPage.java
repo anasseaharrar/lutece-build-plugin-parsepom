@@ -204,4 +204,18 @@ public class DependencyXPage extends MVCApplication
 
         return redirectView( request, VIEW_MANAGE_DEPENDENCYS );
     }
+    
+    /**
+     * Return Html about the dependency
+     *
+     * @param request The Http request
+     * @return the HTML page to display infos
+     */
+    @Action( "getSonarHtml" )
+    public XPage doGetSonarHmtl( HttpServletRequest request )
+    {
+    	String strArtifactId = request.getParameter( "depend" ).toLowerCase( );
+    	
+    	return null;
+    }
 }

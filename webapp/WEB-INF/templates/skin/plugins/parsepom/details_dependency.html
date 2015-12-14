@@ -104,6 +104,14 @@
 					</table>
 				<br />
 				</div>
+				<div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+					<p>Plus d'informations Sonar ? Accédez aux données complètes pour ce plugin en cliquant ici :</p>
+					<#if "${dependency.artifactId}" == "lutece-core">
+						<p><a href="http://dev.lutece.paris.fr/sonar/dashboard/index/fr.paris.lutece:${dependency.artifactId}">click</a></p>
+					<#else>
+						<p><a href="http://dev.lutece.paris.fr/sonar/dashboard/index/fr.paris.lutece.plugins:${dependency.artifactId}">click</a></p>
+					</#if>
+				</div>
    			</div>
    			<table id="myTableDependency" class="table">
    				<thead>
