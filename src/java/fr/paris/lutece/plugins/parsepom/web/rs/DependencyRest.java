@@ -248,12 +248,12 @@ public class DependencyRest
     @POST
     public Response createDependency(
     @FormParam( KEY_ID ) String id,
-    @FormParam( "group_id" ) String group_id, 
-    @FormParam( "artifact_id" ) String artifact_id, 
-    @FormParam( "version" ) String version, 
-    @FormParam( "type" ) String type, 
-    @FormParam( "site_id" ) String site_id, 
-    @HeaderParam(HttpHeaders.ACCEPT) String accept, @QueryParam( Constants.FORMAT_QUERY ) String format) throws IOException
+    @FormParam( KEY_GROUP_ID ) String group_id, 
+    @FormParam( KEY_ARTIFACT_ID ) String artifact_id, 
+    @FormParam( KEY_VERSION ) String version, 
+    @FormParam( KEY_TYPE ) String type, 
+    @FormParam( KEY_SITE_ID ) String site_id, 
+    @HeaderParam( HttpHeaders.ACCEPT ) String accept, @QueryParam( Constants.FORMAT_QUERY ) String format) throws IOException
     {
         if( id != null )
         {

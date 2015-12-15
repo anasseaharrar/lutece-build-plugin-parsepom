@@ -255,7 +255,7 @@ public class SiteRest
     @FormParam( KEY_ID_PLUGINS ) String id_plugins,
     @FormParam( KEY_LAST_UPDATE ) String last_update,
     @FormParam( KEY_PATH ) String path,
-    @HeaderParam(HttpHeaders.ACCEPT) String accept, @QueryParam( Constants.FORMAT_QUERY ) String format) throws IOException
+    @HeaderParam( HttpHeaders.ACCEPT ) String accept, @QueryParam( Constants.FORMAT_QUERY ) String format) throws IOException
     {
         if( id != null )
         {
