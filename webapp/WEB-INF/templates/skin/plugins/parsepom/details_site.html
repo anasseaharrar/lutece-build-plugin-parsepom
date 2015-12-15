@@ -22,6 +22,7 @@
             	<#assign m = 0>
             	<#assign o = 0>
             	<#assign p = 0>
+            	<#assign r = 0>
             	<#assign s = 0>
             	<#assign listArtifactId = []>
             	<#assign listVersion = []>
@@ -114,6 +115,26 @@
 								<td id="last_row">${s} (${ratioSS?round}%)</td>
 							</tr>
 							<tr>
+								<td id="last_row">#i18n{parsepom.details_site.fieldReleasesNotFound}</td>
+								<#if last_release_list?has_content>
+									<#assign r = 0>
+				                    <#list last_release_list?keys as key>
+				                    	<#if "${last_release_list[key]}" == "Release not found">
+				                    		<#assign r = r + 1>
+				                    	</#if>
+				                    </#list>
+		                   		</#if>
+		                   		<#assign ratioNF = "${r}"?number / "${d}"?number * 100>
+								<td id="last_row">${r} (${ratioNF?round}%)</td>
+								<!--  <#if finalMark gt 20>
+									<#assign finalMark = 20>
+								</#if>
+								<#if finalMark lt 0>
+									<#assign finalMark = 0>
+								</#if>
+								<td id="last_row">${finalMark} / 20</td>-->
+							</tr>
+							<tr>
 								<td id="last_row">#i18n{parsepom.details_site.fieldLastUpdate}</td>
 								<td id="last_row">
 									<#if "${last_update_time_interval}"?number == 0>
@@ -144,20 +165,10 @@
 									</#if>
 								</td>
 							</tr>
-							<!--  <tr>
-								<td id="last_row">#i18n{parsepom.details_site.fieldMark}</td>
-								<#if finalMark gt 20>
-									<#assign finalMark = 20>
-								</#if>
-								<#if finalMark lt 0>
-									<#assign finalMark = 0>
-								</#if>
-								<td id="last_row">${finalMark} / 20</td>
-							</tr>-->
 						</tbody>
 					</table>
-					<br /><br /><br />
-					<a href="jsp/site/Portal.jsp?page=site&action=downloadPom&id=${site.id}" class="btn btn-success btn-block" role="button"><font color="white">#i18n{parsepom.details_site.downloadPom}</font></a>
+					<br /><br />
+					<a href="jsp/site/Portal.jsp?page=site&action=downloadPom&id=${site.id}" class="btn btn-success btn-block" role="button"><font color="white"><span class="glyphicon glyphicon-download-alt"></span> #i18n{parsepom.details_site.downloadPom}</font></a>
 				</div>
 			</div>
 			<h3><center><u>#i18n{parsepom.details_site.titleDependency}</u></center></h3>
