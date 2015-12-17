@@ -7,8 +7,16 @@ public class FileChooser
 	public static String chooserDir( )
 	{
 		String path = ""; 
+		JFileChooser f;
 
-		JFileChooser f = new JFileChooser( );
+		if ( Global._path.isEmpty( ) )
+		{
+			f = new JFileChooser( );
+		}
+		else
+		{
+			f = new JFileChooser( Global._path );
+		}
 		f.setFileSelectionMode( JFileChooser.DIRECTORIES_ONLY ); 
 		int result = f.showSaveDialog( null );
 		

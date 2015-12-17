@@ -200,6 +200,8 @@ public class ParsepomXPage extends MVCApplication
     {		
     	path = request.getParameter( PARAMETER_PATH );
 		
+    	Global._path = path;
+    	
     	FileFilter filter = new Extract.DirFilter( );
     	File dirs = new File( path );
     	ext.initMaxInt( );
