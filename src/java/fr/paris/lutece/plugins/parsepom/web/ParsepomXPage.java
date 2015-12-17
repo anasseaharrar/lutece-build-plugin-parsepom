@@ -200,7 +200,7 @@ public class ParsepomXPage extends MVCApplication
     {		
     	path = request.getParameter( PARAMETER_PATH );
 		
-    	Global._path = path;
+    	Global._strPath = path;
     	
     	FileFilter filter = new Extract.DirFilter( );
     	File dirs = new File( path );
@@ -214,7 +214,7 @@ public class ParsepomXPage extends MVCApplication
 
     	ext.openDir( dirs, filter );
     	
-    	if ( ext.getConflict( ).isEmpty( ) && ext.getGlobaleSite().isEmpty( ) )
+    	if ( ext.getConflict( ).isEmpty( ) && ext.getGlobaleSite( ).isEmpty( ) )
  	    {
     		addInfo( INFO_VALIDATE_UPTODATE, getLocale( request ) );
     		path = "";
