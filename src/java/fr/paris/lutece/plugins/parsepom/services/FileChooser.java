@@ -9,13 +9,13 @@ public class FileChooser
 		String path = ""; 
 		JFileChooser f;
 
-		if ( Global._strPath.isEmpty( ) )
+		if ( Global._strFileChooserPath.isEmpty( ) )
 		{
 			f = new JFileChooser( );
 		}
 		else
 		{
-			f = new JFileChooser( Global._strPath );
+			f = new JFileChooser( Global._strFileChooserPath );
 		}
 		f.setFileSelectionMode( JFileChooser.DIRECTORIES_ONLY ); 
 		int result = f.showSaveDialog( null );

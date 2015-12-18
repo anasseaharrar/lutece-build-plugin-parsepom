@@ -40,6 +40,7 @@ import fr.paris.lutece.plugins.parsepom.business.SiteHome;
 import fr.paris.lutece.plugins.parsepom.business.Tools;
 import fr.paris.lutece.plugins.parsepom.business.ToolsHome;
 import fr.paris.lutece.plugins.parsepom.services.FileDownloader;
+import fr.paris.lutece.plugins.parsepom.services.Global;
 import fr.paris.lutece.plugins.parsepom.services.TimeInterval;
 import fr.paris.lutece.portal.util.mvc.commons.annotations.Action;
 import fr.paris.lutece.portal.web.xpages.XPage;
@@ -273,6 +274,7 @@ public class SiteXPage extends MVCApplication
     	String strId = request.getParameter( PARAMETER_ID_SITE );
      	Site site = SiteHome.findByPrimaryKey( Integer.parseInt( strId ) );
     	String fileInputPath = site.getPath( );
+    	Global._strFileChooserPath = "";
     	Integer nReturn = FileDownloader.updateAndDownload( fileInputPath );
     	
     	if ( nReturn == VALUE_INPUT_FILE_NOT_FOUND )
