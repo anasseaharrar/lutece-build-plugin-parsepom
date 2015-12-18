@@ -80,6 +80,7 @@ public class ParsepomXPage extends MVCApplication
     private static final String MARK_ALLSITE = "all";
     private static final String MARK_NB_SITES = "nbSites";
     private static final String MARK_NB_DEPENDENCIES = "nbDependencies";
+    private static final String MARK_INVALID_POM_PATH = "listInvalidPomPath";
 	
 	// Views
     private static final String VIEW_PARSEPOM = "parsepom";
@@ -183,10 +184,11 @@ public class ParsepomXPage extends MVCApplication
     {
     	Map<String, Object> model = getModel(  );
 
+    	model.put( MARK_INVALID_POM_PATH, Global._listInvalidPomPath );
     	model.put( MARK_PARSE, path );
     	model.put( MARK_CONFLICT, ext.getConflict( ) );
     	model.put( MARK_ALLSITE, ext.getGlobaleSite( ) );
-    	
+
         return getXPage( TEMPLATE_VALIDATE, request.getLocale( ), model );
     }
     

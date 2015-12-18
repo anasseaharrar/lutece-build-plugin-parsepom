@@ -1,5 +1,12 @@
 
 <div class="row">
+	<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+	<p><font color="red">#i18n{parsepom.validate_parse.warning1} 
+		<#list listInvalidPomPath as list>
+			[${list}]
+		</#list>
+		#i18n{parsepom.validate_parse.warningMessage1}</font></p>
+	</div>
 	<div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
 		<div class="panel panel-info">
 			<div class="panel-heading">
@@ -60,11 +67,11 @@
 			</ul>
 		</div>
 		<#if conflict?has_content >
-			<p><font color="red">#i18n{parsepom.validate_parse.warning} : 
-			<#list conflict as con>
-				[${con.artifactId}]
-			</#list>
-			#i18n{parsepom.validate_parse.warningMessage} !</font></p>
+			<p><font color="red">#i18n{parsepom.validate_parse.warning2}
+				<#list conflict as con>
+					[${con.artifactId}]
+				</#list>
+			#i18n{parsepom.validate_parse.warningMessage2}</font></p>
 		</#if>
 	</div>
 	<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">

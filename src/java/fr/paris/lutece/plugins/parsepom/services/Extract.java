@@ -171,6 +171,7 @@ public class Extract
         }
         else
         {
+        	Global._listInvalidPomPath.add( site.getPath( ) );
         	AppLogService.error( "Encoding error : the pom located in \"" + site.getPath( ) + "\" is not valid and will not be registered." );
         }
 	}
