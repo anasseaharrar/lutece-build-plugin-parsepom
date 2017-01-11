@@ -32,7 +32,7 @@
  * License 1.0
  */
 package fr.paris.lutece.plugins.parsepom.web;
- 
+
 import fr.paris.lutece.plugins.parsepom.business.Dependency;
 import fr.paris.lutece.plugins.parsepom.business.DependencyHome;
 import fr.paris.lutece.plugins.parsepom.business.SiteHome;
@@ -54,23 +54,23 @@ import javax.servlet.http.HttpServletRequest;
 /**
  * This class provides the user interface to manage Dependency xpages ( manage, create, modify, remove )
  */
- 
-@Controller( xpageName = "dependency" , pageTitleI18nKey = "parsepom.xpage.dependency.pageTitle" , pagePathI18nKey = "parsepom.xpage.dependency.pagePathLabel" )
+
+@Controller( xpageName = "dependency", pageTitleI18nKey = "parsepom.xpage.dependency.pageTitle", pagePathI18nKey = "parsepom.xpage.dependency.pagePathLabel" )
 public class DependencyXPage extends MVCApplication
 {
     /**
 	 * 
 	 */
-	private static final long serialVersionUID = 1L;
-	
-	// Templates
-    private static final String TEMPLATE_MANAGE_DEPENDENCIES="/skin/plugins/parsepom/manage_dependencies.html";
-    private static final String TEMPLATE_DETAILS_DEPENDENCY="/skin/plugins/parsepom/details_dependency.html";
-    
+    private static final long serialVersionUID = 1L;
+
+    // Templates
+    private static final String TEMPLATE_MANAGE_DEPENDENCIES = "/skin/plugins/parsepom/manage_dependencies.html";
+    private static final String TEMPLATE_DETAILS_DEPENDENCY = "/skin/plugins/parsepom/details_dependency.html";
+
     // Parameters
     private static final String PARAMETER_ID_DEPENDENCY = "id";
     private static final String PARAMETER_ARTIFACT_ID_DEPENDENCY = "dependencyArtifactId";
-    
+
     // Markers
     private static final String MARK_DEPENDENCY = "dependency";
     private static final String MARK_SITES_LIST_BY_DEPENDENCY = "sites_list_by_dependency";
@@ -78,53 +78,53 @@ public class DependencyXPage extends MVCApplication
     private static final String MARK_LAST_RELEASE_LIST = "last_release_list";
     private static final String MARK_LAST_RELEASE_STRING = "last_release";
     private static final String MARK_SONAR_DATA = "sonar_data";
-    
+
     // Views
     private static final String VIEW_MANAGE_DEPENDENCYS = "manageDependencys";
     private static final String VIEW_DETAILS_DEPENDENCY = "detailsDependency";
 
     // Actions
     private static final String ACTION_SEARCH_DEPENDENCY_BY_ARTIFACT_ID = "searchDependencyByArtifactId";
-    
+
     // Errors
     private static final String ERROR_NOT_FOUND = "parsepom.error.dependency.notFound";
-    
+
     // Session variable to store working values
     private Dependency _dependency;
-    
+
     @View( value = VIEW_MANAGE_DEPENDENCYS, defaultView = true )
     public XPage getManageDependencys( HttpServletRequest request )
     {
         _dependency = null;
-        
-        Collection<Dependency> dependencyList = DependencyHome.getDependencysListWithoutDuplicates(  );
+
+        Collection<Dependency> dependencyList = DependencyHome.getDependencysListWithoutDuplicates( );
 
         if ( !dependencyList.isEmpty( ) )
         {
-        	Map<String, Object> model = getModel(  );
+            Map<String, Object> model = getModel( );
             Map<String, String> listRelease = new HashMap<>( );
-            
-            for ( Dependency list : dependencyList)
+
+            for ( Dependency list : dependencyList )
             {
-            	Tools tools = ToolsHome.findByArtifactId( list.getArtifactId( ) );
-            	if ( tools != null )
-            		listRelease.put( tools.getArtifactId( ) , tools.getLastRelease( ));
+                Tools tools = ToolsHome.findByArtifactId( list.getArtifactId( ) );
+                if ( tools != null )
+                    listRelease.put( tools.getArtifactId( ), tools.getLastRelease( ) );
             }
-        	model.put( MARK_LAST_RELEASE_LIST, listRelease );
-        	model.put( MARK_DEPENDENCY_LIST_WITHOUT_DUPLICATES, dependencyList );
-        	
-        	return getXPage( TEMPLATE_MANAGE_DEPENDENCIES, request.getLocale(  ), model );
+            model.put( MARK_LAST_RELEASE_LIST, listRelease );
+            model.put( MARK_DEPENDENCY_LIST_WITHOUT_DUPLICATES, dependencyList );
+
+            return getXPage( TEMPLATE_MANAGE_DEPENDENCIES, request.getLocale( ), model );
         }
         addError( ERROR_NOT_FOUND, getLocale( request ) );
 
         return redirectView( request, VIEW_MANAGE_DEPENDENCYS );
     }
 
-    
     /**
      * Returns infos about a dependency
      *
-     * @param request The Http request
+     * @param request
+     *            The Http request
      * @return The HTML page to display infos
      */
     @View( VIEW_DETAILS_DEPENDENCY )
@@ -132,73 +132,73 @@ public class DependencyXPage extends MVCApplication
     {
         int nId = Integer.parseInt( request.getParameter( PARAMETER_ID_DEPENDENCY ) );
 
-        if ( _dependency == null  || ( _dependency.getId( ) != nId ))
+        if ( _dependency == null || ( _dependency.getId( ) != nId ) )
         {
             _dependency = DependencyHome.findByPrimaryKey( nId );
         }
-        
+
         String strArtifactId = _dependency.getArtifactId( );
         List<List<Integer>> idSitesList = SiteHome.getIdSitesListByDependency( );
         String strRelease = "";
-        
+
         Tools tools = ToolsHome.findByArtifactId( strArtifactId );
-    	if ( tools != null )
-    	{
-    		strRelease = tools.getLastRelease( );
-    	}
-    	
-    	HashMap<String, String> sonarData = new HashMap<String, String>( );
-    	sonarData = HttpProcess.getSonarMetricsFromArtifactId( strArtifactId );
-    	
-        Map<String, Object> model = getModel(  );
+        if ( tools != null )
+        {
+            strRelease = tools.getLastRelease( );
+        }
+
+        HashMap<String, String> sonarData = new HashMap<String, String>( );
+        sonarData = HttpProcess.getSonarMetricsFromArtifactId( strArtifactId );
+
+        Map<String, Object> model = getModel( );
         model.put( MARK_DEPENDENCY, _dependency );
         model.put( MARK_LAST_RELEASE_STRING, strRelease );
         model.put( MARK_SITES_LIST_BY_DEPENDENCY, DependencyHome.getSitesListByDependencyId( strArtifactId, idSitesList ) );
         model.put( MARK_SONAR_DATA, sonarData );
-        
-        return getXPage( TEMPLATE_DETAILS_DEPENDENCY, request.getLocale(  ), model );
+
+        return getXPage( TEMPLATE_DETAILS_DEPENDENCY, request.getLocale( ), model );
     }
-    
-    
+
     /**
      * Return Infos about dependency
      *
-     * @param request The Http request
+     * @param request
+     *            The Http request
      * @return the HTML page to display infos
      */
     @Action( ACTION_SEARCH_DEPENDENCY_BY_ARTIFACT_ID )
     public XPage doSearchDependencyByArtifactId( HttpServletRequest request )
     {
-    	String strName = request.getParameter( PARAMETER_ARTIFACT_ID_DEPENDENCY ).toLowerCase( );        
-        Collection<Dependency> list = DependencyHome.getDependencysListWithoutDuplicates(  );
-        
-        for (Dependency _dependency : list)
+        String strName = request.getParameter( PARAMETER_ARTIFACT_ID_DEPENDENCY ).toLowerCase( );
+        Collection<Dependency> list = DependencyHome.getDependencysListWithoutDuplicates( );
+
+        for ( Dependency _dependency : list )
         {
-        	String strArtifactId = _dependency.getArtifactId( );
-        	
-        	if ( strArtifactId.equals( strName ) )
-        	{
-        		String strRelease = "";
-        		
-        		Tools tools = ToolsHome.findByArtifactId( strArtifactId );
-            	if ( tools != null )
-            	{
-            		strRelease = tools.getLastRelease( );
-            	}
-        		
+            String strArtifactId = _dependency.getArtifactId( );
+
+            if ( strArtifactId.equals( strName ) )
+            {
+                String strRelease = "";
+
+                Tools tools = ToolsHome.findByArtifactId( strArtifactId );
+                if ( tools != null )
+                {
+                    strRelease = tools.getLastRelease( );
+                }
+
                 List<List<Integer>> idSitesList = SiteHome.getIdSitesListByDependency( );
-                
+
                 HashMap<String, String> sonarData = new HashMap<String, String>( );
-            	sonarData = HttpProcess.getSonarMetricsFromArtifactId( strArtifactId );
-                
-                Map<String, Object> model = getModel(  );
+                sonarData = HttpProcess.getSonarMetricsFromArtifactId( strArtifactId );
+
+                Map<String, Object> model = getModel( );
                 model.put( MARK_DEPENDENCY, _dependency );
                 model.put( MARK_LAST_RELEASE_STRING, strRelease );
-                model.put( MARK_SITES_LIST_BY_DEPENDENCY,  DependencyHome.getSitesListByDependencyId( strArtifactId, idSitesList ) );
+                model.put( MARK_SITES_LIST_BY_DEPENDENCY, DependencyHome.getSitesListByDependencyId( strArtifactId, idSitesList ) );
                 model.put( MARK_SONAR_DATA, sonarData );
-                
-                return getXPage( TEMPLATE_DETAILS_DEPENDENCY, request.getLocale(  ), model );
-        	}
+
+                return getXPage( TEMPLATE_DETAILS_DEPENDENCY, request.getLocale( ), model );
+            }
         }
         addError( ERROR_NOT_FOUND, getLocale( request ) );
 

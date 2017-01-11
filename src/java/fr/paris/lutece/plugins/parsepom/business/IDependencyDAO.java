@@ -1,4 +1,3 @@
-
 /*
  * Copyright (c) 2002-2015, Mairie de Paris
  * All rights reserved.
@@ -32,7 +31,7 @@
  *
  * License 1.0
  */
- 
+
 package fr.paris.lutece.plugins.parsepom.business;
 
 import fr.paris.lutece.portal.service.plugin.Plugin;
@@ -42,8 +41,6 @@ import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 
-
-
 /**
  * IDependencyDAO Interface
  */
@@ -51,82 +48,109 @@ public interface IDependencyDAO
 {
     /**
      * Insert a new record in the table.
-     * @param dependency instance of the Dependency object to insert
-     * @param plugin the Plugin
+     * 
+     * @param dependency
+     *            instance of the Dependency object to insert
+     * @param plugin
+     *            the Plugin
      */
     void insert( Dependency dependency, Plugin plugin );
 
     /**
      * Update the record in the table
-     * @param dependency the reference of the Dependency
-     * @param plugin the Plugin
+     * 
+     * @param dependency
+     *            the reference of the Dependency
+     * @param plugin
+     *            the Plugin
      */
     void store( Dependency dependency, Plugin plugin );
 
     /**
      * Delete a record from the table
-     * @param nKey The identifier of the Dependency to delete
-     * @param plugin the Plugin
+     * 
+     * @param nKey
+     *            The identifier of the Dependency to delete
+     * @param plugin
+     *            the Plugin
      */
     void delete( int nKey, Plugin plugin );
 
-    ///////////////////////////////////////////////////////////////////////////
+    // /////////////////////////////////////////////////////////////////////////
     // Finders
 
     /**
      * Load the data from the table
-     * @param nKey The identifier of the dependency
-     * @param plugin the Plugin
+     * 
+     * @param nKey
+     *            The identifier of the dependency
+     * @param plugin
+     *            the Plugin
      * @return The instance of the dependency
      */
     Dependency load( int nKey, Plugin plugin );
 
     /**
      * Load the data of all the dependency objects and returns them as a collection
-     * @param plugin the Plugin
+     * 
+     * @param plugin
+     *            the Plugin
      * @return The collection which contains the data of all the dependency objects
      */
     Collection<Dependency> selectDependencysList( Plugin plugin );
-    
+
     /**
      * Load the id of all the dependency objects and returns them as a collection
-     * @param plugin the Plugin
+     * 
+     * @param plugin
+     *            the Plugin
      * @return The collection which contains the id of all the dependency objects
      */
     Collection<Integer> selectIdDependencysList( Plugin plugin );
-    
+
     /**
      * Load the data of all the dependency objects by site and returns them as a collection
-     * @param nSId The identifier of the site
-     * @param plugin the Plugin
+     * 
+     * @param nSId
+     *            The identifier of the site
+     * @param plugin
+     *            the Plugin
      * @return The collection which contains the data of all the dependency objects by site
      */
     Collection<Dependency> selectDependencysListBySiteId( int nSId, Plugin plugin );
-    
+
     /**
      * Load the artifact Id and the name of all the site objects by dependency and load the versions of this dependency by site and returns them as a map
-     * @param strArtifactId The Artifact Id of the site
-     * @param idSitesList The double list of the Dependency ids by site
-     * @param plugin the Plugin
+     * 
+     * @param strArtifactId
+     *            The Artifact Id of the site
+     * @param idSitesList
+     *            The double list of the Dependency ids by site
+     * @param plugin
+     *            the Plugin
      * @return The map which contains the artifactId and the name of all the site objects by dependency and the versions of this dependency by site
      */
     Map<String, ArrayList<String>> selectSitesListByDependencyId( String strArtifactId, List<List<Integer>> idSitesList, Plugin plugin );
 
     /**
      * Load the data of all the dependency objects by artifactId and returns them as a collection
-     * @param strArtifactId The identifier of the dependency
-     * @param plugin the Plugin
+     * 
+     * @param strArtifactId
+     *            The identifier of the dependency
+     * @param plugin
+     *            the Plugin
      * @return The collection which contains the data of all the dependency objects by site
      */
-	Collection<Dependency> selectDependencyListByArtifactId(String strArtifactId, Plugin plugin);
-	
-	/**
-     * Load the data of all all the dependency objects without duplicates Artifact Id and returns them as a collection 
-     * @param plugin the Plugin
+    Collection<Dependency> selectDependencyListByArtifactId( String strArtifactId, Plugin plugin );
+
+    /**
+     * Load the data of all all the dependency objects without duplicates Artifact Id and returns them as a collection
+     * 
+     * @param plugin
+     *            the Plugin
      * @return The collection which contains the data of all the dependency object without duplicates Artifact Id
      */
-	Collection<Dependency> selectDependencysListWithoutDuplicates( Plugin plugin );
-	
-	int newPrimaryKey( Plugin plugin );
-}
+    Collection<Dependency> selectDependencysListWithoutDuplicates( Plugin plugin );
 
+    int newPrimaryKey( Plugin plugin );
+}

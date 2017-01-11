@@ -36,7 +36,6 @@ package fr.paris.lutece.plugins.parsepom.business;
 
 import fr.paris.lutece.test.LuteceTestCase;
 
-
 public class DependencyBusinessTest extends LuteceTestCase
 {
     private final static String GROUPID1 = "GroupId1";
@@ -50,10 +49,10 @@ public class DependencyBusinessTest extends LuteceTestCase
     private final static int SITEID1 = 1;
     private final static int SITEID2 = 2;
 
-    public void testBusiness(  )
+    public void testBusiness( )
     {
         // Initialize an object
-        Dependency dependency = new Dependency();
+        Dependency dependency = new Dependency( );
         dependency.setGroupId( GROUPID1 );
         dependency.setArtifactId( ARTIFACTID1 );
         dependency.setVersion( VERSION1 );
@@ -63,11 +62,11 @@ public class DependencyBusinessTest extends LuteceTestCase
         // Create test
         DependencyHome.create( dependency );
         Dependency dependencyStored = DependencyHome.findByPrimaryKey( dependency.getId( ) );
-        assertEquals( dependencyStored.getGroupId( ) , dependency.getGroupId( ) );
-        assertEquals( dependencyStored.getArtifactId( ) , dependency.getArtifactId( ) );
-        assertEquals( dependencyStored.getVersion( ) , dependency.getVersion( ) );
-        assertEquals( dependencyStored.getType( ) , dependency.getType( ) );
-        assertEquals( dependencyStored.getSiteId( ) , dependency.getSiteId( ) );
+        assertEquals( dependencyStored.getGroupId( ), dependency.getGroupId( ) );
+        assertEquals( dependencyStored.getArtifactId( ), dependency.getArtifactId( ) );
+        assertEquals( dependencyStored.getVersion( ), dependency.getVersion( ) );
+        assertEquals( dependencyStored.getType( ), dependency.getType( ) );
+        assertEquals( dependencyStored.getSiteId( ), dependency.getSiteId( ) );
 
         // Update test
         dependency.setGroupId( GROUPID2 );
@@ -77,11 +76,11 @@ public class DependencyBusinessTest extends LuteceTestCase
         dependency.setSiteId( SITEID2 );
         DependencyHome.update( dependency );
         dependencyStored = DependencyHome.findByPrimaryKey( dependency.getId( ) );
-        assertEquals( dependencyStored.getGroupId( ) , dependency.getGroupId( ) );
-        assertEquals( dependencyStored.getArtifactId( ) , dependency.getArtifactId( ) );
-        assertEquals( dependencyStored.getVersion( ) , dependency.getVersion( ) );
-        assertEquals( dependencyStored.getType( ) , dependency.getType( ) );
-        assertEquals( dependencyStored.getSiteId( ) , dependency.getSiteId( ) );
+        assertEquals( dependencyStored.getGroupId( ), dependency.getGroupId( ) );
+        assertEquals( dependencyStored.getArtifactId( ), dependency.getArtifactId( ) );
+        assertEquals( dependencyStored.getVersion( ), dependency.getVersion( ) );
+        assertEquals( dependencyStored.getType( ), dependency.getType( ) );
+        assertEquals( dependencyStored.getSiteId( ), dependency.getSiteId( ) );
 
         // List test
         DependencyHome.getDependencysList( );
@@ -90,7 +89,7 @@ public class DependencyBusinessTest extends LuteceTestCase
         DependencyHome.remove( dependency.getId( ) );
         dependencyStored = DependencyHome.findByPrimaryKey( dependency.getId( ) );
         assertNull( dependencyStored );
-        
+
     }
 
 }

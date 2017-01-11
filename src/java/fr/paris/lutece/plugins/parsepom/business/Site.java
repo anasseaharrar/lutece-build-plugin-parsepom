@@ -30,47 +30,47 @@
  * POSSIBILITY OF SUCH DAMAGE.
  *
  * License 1.0
- */ 
+ */
 package fr.paris.lutece.plugins.parsepom.business;
 
 import javax.validation.constraints.*;
 import org.hibernate.validator.constraints.*;
 
-
 /**
  * This is the business class for the object Site
- */ 
+ */
 public class Site
 {
-    // Variables declarations 
+    // Variables declarations
     private int _nId;
-    
+
     @NotEmpty( message = "#i18n{parsepom.validation.site.ArtifactId.notEmpty}" )
-    @Size( max = 255 , message = "#i18n{parsepom.validation.site.ArtifactId.size}" ) 
+    @Size( max = 255, message = "#i18n{parsepom.validation.site.ArtifactId.size}" )
     private String _strArtifactId;
-    
+
     @NotEmpty( message = "#i18n{parsepom.validation.site.Name.notEmpty}" )
-    @Size( max = 255 , message = "#i18n{parsepom.validation.site.Name.size}" ) 
+    @Size( max = 255, message = "#i18n{parsepom.validation.site.Name.size}" )
     private String _strName;
-    
+
     @NotEmpty( message = "#i18n{parsepom.validation.site.Version.notEmpty}" )
-    @Size( max = 50 , message = "#i18n{parsepom.validation.site.Version.size}" )
+    @Size( max = 50, message = "#i18n{parsepom.validation.site.Version.size}" )
     private String _strVersion;
- 
+
     @NotEmpty( message = "#i18n{parsepom.validation.site.IdPlugins.notEmpty}" )
-    @Size( max = 60000 , message = "#i18n{parsepom.validation.site.IdPlugins.size}" )
+    @Size( max = 60000, message = "#i18n{parsepom.validation.site.IdPlugins.size}" )
     private String _strIdPlugins;
-    
+
     @NotEmpty( message = "#i18n{parsepom.validation.site.LastUpdate.notEmpty}" )
-    @Size( max = 50 , message = "#i18n{parsepom.validation.site.LastUpdate.size}" )
+    @Size( max = 50, message = "#i18n{parsepom.validation.site.LastUpdate.size}" )
     private String _strLastUpdate;
-    
+
     @NotEmpty( message = "#i18n{parsepom.validation.site.Path.notEmpty}" )
-    @Size( max = 255 , message = "#i18n{parsepom.validation.site.Path.size}" )
+    @Size( max = 255, message = "#i18n{parsepom.validation.site.Path.size}" )
     private String _strPath;
 
     /**
      * Returns the Id
+     * 
      * @return The Id
      */
     public int getId( )
@@ -80,8 +80,10 @@ public class Site
 
     /**
      * Sets the Id
-     * @param nId The Id
-     */ 
+     * 
+     * @param nId
+     *            The Id
+     */
     public void setId( int nId )
     {
         _nId = nId;
@@ -89,6 +91,7 @@ public class Site
 
     /**
      * Returns the ArtifactId
+     * 
      * @return The ArtifactId
      */
     public String getArtifactId( )
@@ -98,15 +101,18 @@ public class Site
 
     /**
      * Sets the ArtifactId
-     * @param strArtifactId The ArtifactId
-     */ 
+     * 
+     * @param strArtifactId
+     *            The ArtifactId
+     */
     public void setArtifactId( String strArtifactId )
     {
         _strArtifactId = strArtifactId;
     }
-    
+
     /**
      * Returns the Name
+     * 
      * @return The Name
      */
     public String getName( )
@@ -116,15 +122,18 @@ public class Site
 
     /**
      * Sets the Name
-     * @param strName The Name
-     */ 
+     * 
+     * @param strName
+     *            The Name
+     */
     public void setName( String strName )
     {
         _strName = strName;
     }
-    
+
     /**
      * Returns the Version
+     * 
      * @return The Version
      */
     public String getVersion( )
@@ -134,15 +143,18 @@ public class Site
 
     /**
      * Sets the Version
-     * @param strVersion The Version
-     */ 
+     * 
+     * @param strVersion
+     *            The Version
+     */
     public void setVersion( String strVersion )
     {
         _strVersion = strVersion;
     }
-    
+
     /**
      * Returns the IdPLugins
+     * 
      * @return The IdPlugins
      */
     public String getIdPlugins( )
@@ -152,15 +164,18 @@ public class Site
 
     /**
      * Sets the IdPlugins
-     * @param strName The IdPlugins
-     */ 
+     * 
+     * @param strName
+     *            The IdPlugins
+     */
     public void setIdPlugins( String strIdPlugins )
     {
         _strIdPlugins = strIdPlugins;
     }
-    
+
     /**
      * Returns the LastUpdate
+     * 
      * @return The LastUpdate
      */
     public String getLastUpdate( )
@@ -170,15 +185,18 @@ public class Site
 
     /**
      * Sets the LastUpdate
-     * @param strLastUpdate The LastUpdate
-     */ 
+     * 
+     * @param strLastUpdate
+     *            The LastUpdate
+     */
     public void setLastUpdate( String strLastUpdate )
     {
         _strLastUpdate = strLastUpdate;
     }
-    
+
     /**
      * Returns the Path
+     * 
      * @return The Path
      */
     public String getPath( )
@@ -188,8 +206,10 @@ public class Site
 
     /**
      * Sets the Path
-     * @param strPath The Path
-     */ 
+     * 
+     * @param strPath
+     *            The Path
+     */
     public void setPath( String strPath )
     {
         _strPath = strPath;

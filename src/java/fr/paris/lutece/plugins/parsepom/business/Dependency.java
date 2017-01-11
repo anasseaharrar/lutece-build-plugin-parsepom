@@ -30,41 +30,41 @@
  * POSSIBILITY OF SUCH DAMAGE.
  *
  * License 1.0
- */ 
+ */
 package fr.paris.lutece.plugins.parsepom.business;
 
 import javax.validation.constraints.*;
 import org.hibernate.validator.constraints.*;
 
-
 /**
  * This is the business class for the object Dependency
- */ 
+ */
 public class Dependency
 {
-    // Variables declarations 
+    // Variables declarations
     private int _nId;
-    
+
     @NotEmpty( message = "#i18n{parsepom.validation.dependency.GroupId.notEmpty}" )
-    @Size( max = 255 , message = "#i18n{parsepom.validation.dependency.GroupId.size}" ) 
+    @Size( max = 255, message = "#i18n{parsepom.validation.dependency.GroupId.size}" )
     private String _strGroupId;
-    
+
     @NotEmpty( message = "#i18n{parsepom.validation.dependency.ArtifactId.notEmpty}" )
-    @Size( max = 255 , message = "#i18n{parsepom.validation.dependency.ArtifactId.size}" ) 
+    @Size( max = 255, message = "#i18n{parsepom.validation.dependency.ArtifactId.size}" )
     private String _strArtifactId;
-    
+
     @NotEmpty( message = "#i18n{parsepom.validation.dependency.Version.notEmpty}" )
-    @Size( max = 50 , message = "#i18n{parsepom.validation.dependency.Version.size}" ) 
+    @Size( max = 50, message = "#i18n{parsepom.validation.dependency.Version.size}" )
     private String _strVersion;
-    
+
     @NotEmpty( message = "#i18n{parsepom.validation.dependency.Type.notEmpty}" )
-    @Size( max = 50 , message = "#i18n{parsepom.validation.dependency.Type.size}" ) 
+    @Size( max = 50, message = "#i18n{parsepom.validation.dependency.Type.size}" )
     private String _strType;
-    
+
     private int _nSiteId;
 
     /**
      * Returns the Id
+     * 
      * @return The Id
      */
     public int getId( )
@@ -74,8 +74,10 @@ public class Dependency
 
     /**
      * Sets the Id
-     * @param nId The Id
-     */ 
+     * 
+     * @param nId
+     *            The Id
+     */
     public void setId( int nId )
     {
         _nId = nId;
@@ -83,6 +85,7 @@ public class Dependency
 
     /**
      * Returns the GroupId
+     * 
      * @return The GroupId
      */
     public String getGroupId( )
@@ -92,14 +95,18 @@ public class Dependency
 
     /**
      * Sets the GroupId
-     * @param strGroupId The GroupId
-     */ 
+     * 
+     * @param strGroupId
+     *            The GroupId
+     */
     public void setGroupId( String strGroupId )
     {
         _strGroupId = strGroupId;
     }
+
     /**
      * Returns the ArtifactId
+     * 
      * @return The ArtifactId
      */
     public String getArtifactId( )
@@ -109,14 +116,18 @@ public class Dependency
 
     /**
      * Sets the ArtifactId
-     * @param strArtifactId The ArtifactId
-     */ 
+     * 
+     * @param strArtifactId
+     *            The ArtifactId
+     */
     public void setArtifactId( String strArtifactId )
     {
         _strArtifactId = strArtifactId;
     }
+
     /**
      * Returns the Version
+     * 
      * @return The Version
      */
     public String getVersion( )
@@ -126,14 +137,18 @@ public class Dependency
 
     /**
      * Sets the Version
-     * @param strVersion The Version
-     */ 
+     * 
+     * @param strVersion
+     *            The Version
+     */
     public void setVersion( String strVersion )
     {
         _strVersion = strVersion;
     }
+
     /**
      * Returns the Type
+     * 
      * @return The Type
      */
     public String getType( )
@@ -143,14 +158,18 @@ public class Dependency
 
     /**
      * Sets the Type
-     * @param strType The Type
-     */ 
+     * 
+     * @param strType
+     *            The Type
+     */
     public void setType( String strType )
     {
         _strType = strType;
     }
+
     /**
      * Returns the SiteId
+     * 
      * @return The SiteId
      */
     public int getSiteId( )
@@ -160,8 +179,10 @@ public class Dependency
 
     /**
      * Sets the SiteId
-     * @param nSiteId The SiteId
-     */ 
+     * 
+     * @param nSiteId
+     *            The SiteId
+     */
     public void setSiteId( int nSiteId )
     {
         _nSiteId = nSiteId;

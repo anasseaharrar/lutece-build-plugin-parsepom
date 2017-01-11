@@ -31,7 +31,7 @@
  *
  * License 1.0
  */
- 
+
 package fr.paris.lutece.plugins.parsepom.business;
 
 import fr.paris.lutece.portal.service.plugin.Plugin;
@@ -54,14 +54,16 @@ public final class ToolsHome
     /**
      * Private constructor - this class need not be instantiated
      */
-    private ToolsHome(  )
+    private ToolsHome( )
     {
     }
 
     /**
      * Create an instance of the tools class
-     * @param tools The instance of the Tools which contains the informations to store
-     * @return The  instance of tools which has been created with its primary key.
+     * 
+     * @param tools
+     *            The instance of the Tools which contains the informations to store
+     * @return The instance of tools which has been created with its primary key.
      */
     public static Tools create( Tools tools )
     {
@@ -72,8 +74,10 @@ public final class ToolsHome
 
     /**
      * Update of the tools which is specified in parameter
-     * @param tools The instance of the Tools which contains the data to store
-     * @return The instance of the  tools which has been updated
+     * 
+     * @param tools
+     *            The instance of the Tools which contains the data to store
+     * @return The instance of the tools which has been updated
      */
     public static Tools update( Tools tools )
     {
@@ -84,54 +88,60 @@ public final class ToolsHome
 
     /**
      * Remove the tools whose identifier is specified in parameter
-     * @param nKey The tools Id
+     * 
+     * @param nKey
+     *            The tools Id
      */
     public static void remove( int nKey )
     {
         _dao.delete( nKey, _plugin );
     }
 
-    ///////////////////////////////////////////////////////////////////////////
+    // /////////////////////////////////////////////////////////////////////////
     // Finders
 
     /**
      * Returns an instance of a tools whose identifier is specified in parameter
-     * @param nKey The tools primary key
+     * 
+     * @param nKey
+     *            The tools primary key
      * @return an instance of Tools
      */
     public static Tools findByPrimaryKey( int nKey )
     {
-        return _dao.load( nKey, _plugin);
+        return _dao.load( nKey, _plugin );
     }
 
     /**
      * Load the data of all the tools objects and returns them in form of a collection
+     * 
      * @return the collection which contains the data of all the tools objects
      */
     public static Collection<Tools> getToolsList( )
     {
         return _dao.selectToolsList( _plugin );
     }
-    
+
     /**
      * Load the id of all the tools objects and returns them in form of a collection
+     * 
      * @return the collection which contains the id of all the tools objects
      */
     public static Collection<Integer> getIdToolssList( )
     {
         return _dao.selectIdToolsList( _plugin );
     }
-      
 
     /**
      * Returns an instance of a tools whose identifier is specified in parameter
-     * @param nKey The tools primary key
+     * 
+     * @param nKey
+     *            The tools primary key
      * @return an instance of Tools
      */
     public static Tools findByArtifactId( String strArtifatId )
     {
-        return _dao.selectByArtifactId( strArtifatId, _plugin);
+        return _dao.selectByArtifactId( strArtifatId, _plugin );
     }
-  
-}
 
+}

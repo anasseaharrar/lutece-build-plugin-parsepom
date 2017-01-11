@@ -36,7 +36,6 @@ package fr.paris.lutece.plugins.parsepom.business;
 
 import fr.paris.lutece.test.LuteceTestCase;
 
-
 public class ToolsBusinessTest extends LuteceTestCase
 {
     private final static String ARTIFACTID1 = "ArtifactId1";
@@ -44,27 +43,27 @@ public class ToolsBusinessTest extends LuteceTestCase
     private final static String LASTRELEASE1 = "LastRelease1";
     private final static String LASTRELEASE2 = "LastRelease2";
 
-    public void testBusiness(  )
+    public void testBusiness( )
     {
         // Initialize an object
-        Tools tools = new Tools();
+        Tools tools = new Tools( );
         tools.setArtifactId( ARTIFACTID1 );
         tools.setLastRelease( LASTRELEASE1 );
 
         // Create test
         ToolsHome.create( tools );
         Tools toolsStored = ToolsHome.findByPrimaryKey( tools.getId( ) );
-        assertEquals( toolsStored.getArtifactId( ) , tools.getArtifactId( ) );
-        assertEquals( toolsStored.getLastRelease( ) , tools.getLastRelease( ) );
+        assertEquals( toolsStored.getArtifactId( ), tools.getArtifactId( ) );
+        assertEquals( toolsStored.getLastRelease( ), tools.getLastRelease( ) );
 
         // Update test
         tools.setArtifactId( ARTIFACTID2 );
         tools.setLastRelease( LASTRELEASE2 );
         ToolsHome.update( tools );
         toolsStored = ToolsHome.findByPrimaryKey( tools.getId( ) );
-        assertEquals( toolsStored.getArtifactId( ) , tools.getArtifactId( ) );
-        assertEquals( toolsStored.getLastRelease( ) , tools.getLastRelease( ) );
-        
+        assertEquals( toolsStored.getArtifactId( ), tools.getArtifactId( ) );
+        assertEquals( toolsStored.getLastRelease( ), tools.getLastRelease( ) );
+
         // List test
         ToolsHome.getToolsList( );
 
@@ -72,7 +71,7 @@ public class ToolsBusinessTest extends LuteceTestCase
         ToolsHome.remove( tools.getId( ) );
         toolsStored = ToolsHome.findByPrimaryKey( tools.getId( ) );
         assertNull( toolsStored );
-        
+
     }
 
 }

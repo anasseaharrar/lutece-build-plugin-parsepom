@@ -1,4 +1,3 @@
-
 /*
  * Copyright (c) 2002-2015, Mairie de Paris
  * All rights reserved.
@@ -32,13 +31,12 @@
  *
  * License 1.0
  */
- 
+
 package fr.paris.lutece.plugins.parsepom.business;
 
 import fr.paris.lutece.portal.service.plugin.Plugin;
 
 import java.util.Collection;
-
 
 /**
  * IToolsDAO Interface
@@ -47,55 +45,72 @@ public interface IToolsDAO
 {
     /**
      * Insert a new record in the table.
-     * @param tools instance of the Tools object to insert
-     * @param plugin the Plugin
+     * 
+     * @param tools
+     *            instance of the Tools object to insert
+     * @param plugin
+     *            the Plugin
      */
     void insert( Tools tools, Plugin plugin );
 
     /**
      * Update the record in the table
-     * @param tools the reference of the Tools
-     * @param plugin the Plugin
+     * 
+     * @param tools
+     *            the reference of the Tools
+     * @param plugin
+     *            the Plugin
      */
     void store( Tools tools, Plugin plugin );
 
     /**
      * Delete a record from the table
-     * @param nKey The identifier of the Tools to delete
-     * @param plugin the Plugin
+     * 
+     * @param nKey
+     *            The identifier of the Tools to delete
+     * @param plugin
+     *            the Plugin
      */
     void delete( int nKey, Plugin plugin );
 
-    ///////////////////////////////////////////////////////////////////////////
+    // /////////////////////////////////////////////////////////////////////////
     // Finders
 
     /**
      * Load the data from the table
-     * @param nKey The identifier of the tools
-     * @param plugin the Plugin
+     * 
+     * @param nKey
+     *            The identifier of the tools
+     * @param plugin
+     *            the Plugin
      * @return The instance of the tools
      */
     Tools load( int nKey, Plugin plugin );
 
     /**
      * Load the data of all the tools objects and returns them as a collection
-     * @param plugin the Plugin
+     * 
+     * @param plugin
+     *            the Plugin
      * @return The collection which contains the data of all the tools objects
      */
     Collection<Tools> selectToolsList( Plugin plugin );
-    
+
     /**
      * Load the id of all the tools objects and returns them as a collection
-     * @param plugin the Plugin
+     * 
+     * @param plugin
+     *            the Plugin
      * @return The collection which contains the id of all the tools objects
      */
     Collection<Integer> selectIdToolsList( Plugin plugin );
-    
+
     /**
      * Load the data of tools whit artifactId objects and returns Tools
-     * @param plugin the Plugin strArtifactId the String to identifier the tools 
+     * 
+     * @param plugin
+     *            the Plugin strArtifactId the String to identifier the tools
      * @return Tools object
      */
     Tools selectByArtifactId( String strArtifactId, Plugin plugin );
 }
-

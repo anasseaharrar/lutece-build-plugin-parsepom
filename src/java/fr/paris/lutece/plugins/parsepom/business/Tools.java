@@ -30,32 +30,32 @@
  * POSSIBILITY OF SUCH DAMAGE.
  *
  * License 1.0
- */ 
+ */
 
 package fr.paris.lutece.plugins.parsepom.business;
 
 import javax.validation.constraints.*;
 import org.hibernate.validator.constraints.*;
 
-
 /**
  * This is the business class for the object Dependency
- */ 
+ */
 public class Tools
 {
-    // Variables declarations 
+    // Variables declarations
     private int _nId;
-    
+
     @NotEmpty( message = "#i18n{parsepom.validation.tools.ArtifactId.notEmpty}" )
-    @Size( max = 255 , message = "#i18n{parsepom.validation.tools.ArtifactId.size}" ) 
+    @Size( max = 255, message = "#i18n{parsepom.validation.tools.ArtifactId.size}" )
     private String _strArtifactId;
-    
+
     @NotEmpty( message = "#i18n{parsepom.validation.tools.LastRelease.notEmpty}" )
-    @Size( max = 50 , message = "#i18n{parsepom.validation.tools.LastRelease.size}" ) 
+    @Size( max = 50, message = "#i18n{parsepom.validation.tools.LastRelease.size}" )
     private String _strLastRelease;
-    
+
     /**
      * Returns the Id
+     * 
      * @return The Id
      */
     public int getId( )
@@ -65,8 +65,10 @@ public class Tools
 
     /**
      * Sets the Id
-     * @param nId The Id
-     */ 
+     * 
+     * @param nId
+     *            The Id
+     */
     public void setId( int nId )
     {
         _nId = nId;
@@ -74,6 +76,7 @@ public class Tools
 
     /**
      * Returns the ArtifactId
+     * 
      * @return The ArtifactId
      */
     public String getArtifactId( )
@@ -83,14 +86,18 @@ public class Tools
 
     /**
      * Sets the ArtifactId
-     * @param strArtifactId The ArtifactId
-     */ 
+     * 
+     * @param strArtifactId
+     *            The ArtifactId
+     */
     public void setArtifactId( String strArtifactId )
     {
         _strArtifactId = strArtifactId;
     }
+
     /**
      * Returns the Version
+     * 
      * @return The Version
      */
     public String getLastRelease( )
@@ -100,11 +107,13 @@ public class Tools
 
     /**
      * Sets the Version
-     * @param strVersion The Version
-     */ 
+     * 
+     * @param strVersion
+     *            The Version
+     */
     public void setLastRelease( String strLastRealese )
     {
         _strLastRelease = strLastRealese;
     }
-   
+
 }

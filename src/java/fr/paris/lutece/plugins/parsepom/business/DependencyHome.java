@@ -31,7 +31,7 @@
  *
  * License 1.0
  */
- 
+
 package fr.paris.lutece.plugins.parsepom.business;
 
 import fr.paris.lutece.portal.service.plugin.Plugin;
@@ -57,14 +57,16 @@ public final class DependencyHome
     /**
      * Private constructor - this class need not be instantiated
      */
-    private DependencyHome(  )
+    private DependencyHome( )
     {
     }
 
     /**
      * Create an instance of the dependency class
-     * @param dependency The instance of the Dependency which contains the informations to store
-     * @return The  instance of dependency which has been created with its primary key.
+     * 
+     * @param dependency
+     *            The instance of the Dependency which contains the informations to store
+     * @return The instance of dependency which has been created with its primary key.
      */
     public static Dependency create( Dependency dependency )
     {
@@ -75,8 +77,10 @@ public final class DependencyHome
 
     /**
      * Update of the dependency which is specified in parameter
-     * @param dependency The instance of the Dependency which contains the data to store
-     * @return The instance of the  dependency which has been updated
+     * 
+     * @param dependency
+     *            The instance of the Dependency which contains the data to store
+     * @return The instance of the dependency which has been updated
      */
     public static Dependency update( Dependency dependency )
     {
@@ -87,87 +91,100 @@ public final class DependencyHome
 
     /**
      * Remove the dependency whose identifier is specified in parameter
-     * @param nKey The dependency Id
+     * 
+     * @param nKey
+     *            The dependency Id
      */
     public static void remove( int nKey )
     {
         _dao.delete( nKey, _plugin );
     }
 
-    ///////////////////////////////////////////////////////////////////////////
+    // /////////////////////////////////////////////////////////////////////////
     // Finders
 
     /**
      * Returns an instance of a dependency whose identifier is specified in parameter
-     * @param nKey The dependency primary key
+     * 
+     * @param nKey
+     *            The dependency primary key
      * @return an instance of Dependency
      */
     public static Dependency findByPrimaryKey( int nKey )
     {
-        return _dao.load( nKey, _plugin);
+        return _dao.load( nKey, _plugin );
     }
 
     /**
      * Load the data of all the dependency objects and returns them in form of a collection
+     * 
      * @return the collection which contains the data of all the dependency objects
      */
     public static Collection<Dependency> getDependencysList( )
     {
         return _dao.selectDependencysList( _plugin );
     }
-    
+
     /**
      * Load the id of all the dependency objects and returns them in form of a collection
+     * 
      * @return the collection which contains the id of all the dependency objects
      */
     public static Collection<Integer> getIdDependencysList( )
     {
         return _dao.selectIdDependencysList( _plugin );
     }
-    
+
     /**
      * Load the data of all the dependency objects by site and returns them in form of a collection
-     * @param nSId The identifier of the site 
+     * 
+     * @param nSId
+     *            The identifier of the site
      * @return the collection which contains the data of all the dependency objects
      */
     public static Collection<Dependency> getDependencysListBySiteId( int nSId )
     {
-        return _dao.selectDependencysListBySiteId( nSId, _plugin);
+        return _dao.selectDependencysListBySiteId( nSId, _plugin );
     }
-    
+
     /**
      * Load the artifactId and the name of all the site objects by dependency and load the versions of this dependency by site and returns them as a map
-     * @param strArtifactId The Artifact Id of the site
-     * @param idSitesList The double list of the Dependency ids by site
+     * 
+     * @param strArtifactId
+     *            The Artifact Id of the site
+     * @param idSitesList
+     *            The double list of the Dependency ids by site
      * @return The map which contains the artifactId and the name of all the site objects by dependency and the versions of this dependency by site
      */
     public static Map<String, ArrayList<String>> getSitesListByDependencyId( String strArtifactId, List<List<Integer>> idSitesList )
     {
-    	return _dao.selectSitesListByDependencyId( strArtifactId, idSitesList, _plugin );
+        return _dao.selectSitesListByDependencyId( strArtifactId, idSitesList, _plugin );
     }
-    
+
     /**
      * Load the list of dependency with ArtifactId
-     * @param strArtifactId The Artifact Id of the dependency
+     * 
+     * @param strArtifactId
+     *            The Artifact Id of the dependency
      * @return the collection which contains the data of all the dependencies matching with this Artifact Id
      */
     public static Collection<Dependency> getDependencysByArtifactId( String strArtifactId )
     {
-    	return _dao.selectDependencyListByArtifactId(strArtifactId, _plugin);
+        return _dao.selectDependencyListByArtifactId( strArtifactId, _plugin );
     }
-    
+
     /**
      * Load the list of dependency without duplicates Artifact Id
+     * 
      * @return the collection which contains the data of all the dependencies without duplicates Artifact Id
      */
     public static Collection<Dependency> getDependencysListWithoutDuplicates( )
     {
-    	return _dao.selectDependencysListWithoutDuplicates( _plugin );
+        return _dao.selectDependencysListWithoutDuplicates( _plugin );
     }
-    
+
     public static int getMaxId( )
     {
-    	return _dao.newPrimaryKey(  _plugin );
+        return _dao.newPrimaryKey( _plugin );
     }
 }
-

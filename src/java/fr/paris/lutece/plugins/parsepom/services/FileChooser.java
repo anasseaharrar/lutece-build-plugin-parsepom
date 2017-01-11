@@ -2,27 +2,27 @@ package fr.paris.lutece.plugins.parsepom.services;
 
 import javax.swing.*;
 
-public class FileChooser 
+public class FileChooser
 {
-	public static String chooserDir( )
-	{
-		String path = ""; 
-		JFileChooser f;
+    public static String chooserDir( )
+    {
+        String path = "";
+        JFileChooser f;
 
-		if ( Global._strFileChooserPath.isEmpty( ) )
-		{
-			f = new JFileChooser( );
-		}
-		else
-		{
-			f = new JFileChooser( Global._strFileChooserPath );
-		}
-		f.setFileSelectionMode( JFileChooser.DIRECTORIES_ONLY ); 
-		int result = f.showSaveDialog( null );
-		
-		if ( f.getSelectedFile() != null && result == JFileChooser.APPROVE_OPTION )
-			path = f.getSelectedFile( ).toString( );
+        if ( Global._strFileChooserPath.isEmpty( ) )
+        {
+            f = new JFileChooser( );
+        }
+        else
+        {
+            f = new JFileChooser( Global._strFileChooserPath );
+        }
+        f.setFileSelectionMode( JFileChooser.DIRECTORIES_ONLY );
+        int result = f.showSaveDialog( null );
 
-		return path ;
-	}
+        if ( f.getSelectedFile( ) != null && result == JFileChooser.APPROVE_OPTION )
+            path = f.getSelectedFile( ).toString( );
+
+        return path;
+    }
 }

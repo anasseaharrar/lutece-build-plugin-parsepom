@@ -32,7 +32,6 @@
  * License 1.0
  */
 
-
 package fr.paris.lutece.plugins.parsepom.business;
 
 import fr.paris.lutece.portal.service.plugin.Plugin;
@@ -59,22 +58,24 @@ public final class ToolsDAO implements IToolsDAO
 
     /**
      * Generates a new primary key
-     * @param plugin The Plugin
+     * 
+     * @param plugin
+     *            The Plugin
      * @return The new primary key
      */
-    public int newPrimaryKey( Plugin plugin)
+    public int newPrimaryKey( Plugin plugin )
     {
-        DAOUtil daoUtil = new DAOUtil( SQL_QUERY_NEW_PK , plugin  );
+        DAOUtil daoUtil = new DAOUtil( SQL_QUERY_NEW_PK, plugin );
         daoUtil.executeQuery( );
 
         int nKey = 1;
 
-        if( daoUtil.next( ) )
+        if ( daoUtil.next( ) )
         {
-                nKey = daoUtil.getInt( 1 ) + 1;
+            nKey = daoUtil.getInt( 1 ) + 1;
         }
 
-        daoUtil.free();
+        daoUtil.free( );
 
         return nKey;
     }
@@ -104,7 +105,7 @@ public final class ToolsDAO implements IToolsDAO
     public Tools load( int nKey, Plugin plugin )
     {
         DAOUtil daoUtil = new DAOUtil( SQL_QUERY_SELECT, plugin );
-        daoUtil.setInt( 1 , nKey );
+        daoUtil.setInt( 1, nKey );
         daoUtil.executeQuery( );
 
         Tools tools = null;
@@ -128,7 +129,7 @@ public final class ToolsDAO implements IToolsDAO
     public void delete( int nKey, Plugin plugin )
     {
         DAOUtil daoUtil = new DAOUtil( SQL_QUERY_DELETE, plugin );
-        daoUtil.setInt( 1 , nKey );
+        daoUtil.setInt( 1, nKey );
         daoUtil.executeUpdate( );
         daoUtil.free( );
     }
@@ -140,7 +141,7 @@ public final class ToolsDAO implements IToolsDAO
     public void store( Tools tools, Plugin plugin )
     {
         DAOUtil daoUtil = new DAOUtil( SQL_QUERY_UPDATE, plugin );
-        
+
         daoUtil.setInt( 1, tools.getId( ) );
         daoUtil.setString( 2, tools.getArtifactId( ) );
         daoUtil.setString( 3, tools.getLastRelease( ) );
@@ -156,14 +157,14 @@ public final class ToolsDAO implements IToolsDAO
     @Override
     public Collection<Tools> selectToolsList( Plugin plugin )
     {
-        Collection<Tools> toolsList = new ArrayList<Tools>(  );
+        Collection<Tools> toolsList = new ArrayList<Tools>( );
         DAOUtil daoUtil = new DAOUtil( SQL_QUERY_SELECTALL, plugin );
-        daoUtil.executeQuery(  );
+        daoUtil.executeQuery( );
 
-        while ( daoUtil.next(  ) )
+        while ( daoUtil.next( ) )
         {
-            Tools tools = new Tools(  );
-            
+            Tools tools = new Tools( );
+
             tools.setId( daoUtil.getInt( 1 ) );
             tools.setArtifactId( daoUtil.getString( 2 ) );
             tools.setLastRelease( daoUtil.getString( 3 ) );
@@ -174,42 +175,42 @@ public final class ToolsDAO implements IToolsDAO
         daoUtil.free( );
         return toolsList;
     }
-    
+
     /**
      * {@inheritDoc }
      */
     @Override
     public Collection<Integer> selectIdToolsList( Plugin plugin )
     {
-            Collection<Integer> toolsList = new ArrayList<Integer>( );
-            DAOUtil daoUtil = new DAOUtil( SQL_QUERY_SELECTALL_ID, plugin );
-            daoUtil.executeQuery(  );
+        Collection<Integer> toolsList = new ArrayList<Integer>( );
+        DAOUtil daoUtil = new DAOUtil( SQL_QUERY_SELECTALL_ID, plugin );
+        daoUtil.executeQuery( );
 
-            while ( daoUtil.next(  ) )
-            {
-                toolsList.add( daoUtil.getInt( 1 ) );
-            }
+        while ( daoUtil.next( ) )
+        {
+            toolsList.add( daoUtil.getInt( 1 ) );
+        }
 
-            daoUtil.free( );
-            return toolsList;
+        daoUtil.free( );
+        return toolsList;
     }
-    
+
     /**
      * {@inheritDoc }
      */
     @Override
     public Tools selectByArtifactId( String strArtifactId, Plugin plugin )
     {
-    	DAOUtil daoUtil = new DAOUtil( SQL_QUERY_SELECT_BY_ARTIFACTID, plugin );
+        DAOUtil daoUtil = new DAOUtil( SQL_QUERY_SELECT_BY_ARTIFACTID, plugin );
         daoUtil.setString( 1, strArtifactId );
-        daoUtil.executeQuery(  );
-        
-    	Tools tools = null;            
-        
+        daoUtil.executeQuery( );
+
+        Tools tools = null;
+
         if ( daoUtil.next( ) )
         {
             tools = new Tools( );
-            
+
             tools.setId( daoUtil.getInt( 1 ) );
             tools.setArtifactId( daoUtil.getString( 2 ) );
             tools.setLastRelease( daoUtil.getString( 3 ) );
@@ -218,5 +219,5 @@ public final class ToolsDAO implements IToolsDAO
         daoUtil.free( );
         return tools;
     }
-      
+
 }

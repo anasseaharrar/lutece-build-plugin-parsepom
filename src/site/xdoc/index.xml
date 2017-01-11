@@ -11,14 +11,17 @@
             </p>
             -->
             <subsection name="Introduction">
-                <p></p>
+                <p>
+                    This plugin build a list of sites found at a given node of a file system. 
+                    It parses every pom.xml found to extract components (plugins, modules, ...). 
+                    For each plugin, it displays the current version and the latest available version.
+                </p>
+                <p>
+                    The plugin provides also the list of all components found in all sites and 
+                    tells in which site it is used and in which version.
+                </p>
             </subsection>
-            <subsection name="Configuration">
-                <p></p>
-            </subsection>
-            <subsection name="Usage">
-                <p></p>
-            </subsection>
+                        
         </section>
     </body>
 </document>

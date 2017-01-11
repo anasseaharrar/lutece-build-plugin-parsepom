@@ -54,30 +54,29 @@ import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
-
 /**
  * This class provides the user interface to manage Site xpages ( manage, create, modify, remove, etc. )
  */
- 
-@Controller( xpageName = "site" , pageTitleI18nKey = "parsepom.xpage.site.pageTitle" , pagePathI18nKey = "parsepom.xpage.site.pagePathLabel" )
+
+@Controller( xpageName = "site", pageTitleI18nKey = "parsepom.xpage.site.pageTitle", pagePathI18nKey = "parsepom.xpage.site.pagePathLabel" )
 public class SiteXPage extends MVCApplication
 {
     /**
 	 * 
 	 */
-	private static final long serialVersionUID = 1L;
-	
-	// Templates
-	private static final String TEMPLATE_MANAGE_SITES="/skin/plugins/parsepom/manage_sites.html";
-    private static final String TEMPLATE_DETAILS_SITE="/skin/plugins/parsepom/details_site.html";
-    
+    private static final long serialVersionUID = 1L;
+
+    // Templates
+    private static final String TEMPLATE_MANAGE_SITES = "/skin/plugins/parsepom/manage_sites.html";
+    private static final String TEMPLATE_DETAILS_SITE = "/skin/plugins/parsepom/details_site.html";
+
     // Parameters
-    private static final String PARAMETER_ID_SITE="id";
+    private static final String PARAMETER_ID_SITE = "id";
     private static final String PARAMETER_ARTIFACT_ID_SITE = "siteArtifactId";
     private static final String PARAMETER_NAME_SITE = "siteName";
     private static final String PARAMETER_VERSION_SITE = "siteVersion";
     private static final String PARAMETER_VERSION_LAST_UPDATE = "siteLastUpdate";
-    
+
     // Markers
     private static final String MARK_SITE_LIST = "site_list";
     private static final String MARK_SITE = "site";
@@ -88,7 +87,7 @@ public class SiteXPage extends MVCApplication
     private static final String MARK_SITE_LIST_BY_ARTIFACT_ID = "site_list_by_artifact_id";
     private static final String MARK_SITE_LIST_BY_LAST_UPDATE = "site_list_by_last_update";
     private static final String MARK_LAST_UPDATE_TIME_INTERVAL = "last_update_time_interval";
-    
+
     // Views
     private static final String VIEW_MANAGE_SITES = "manageSites";
     private static final String VIEW_DETAILS_SITE = "detailsSite";
@@ -102,7 +101,7 @@ public class SiteXPage extends MVCApplication
 
     // Infos
     private static final String INFO_FILE_DOWNLOADED = "parsepom.info.site.fileDownloaded";
-    
+
     // Errors
     private static final String ERROR_DIR_NOT_FOUND = "parsepom.error.site.DirNotFound";
     private static final String ERROR_NOT_FOUND = "parsepom.error.site.notFound";
@@ -112,26 +111,25 @@ public class SiteXPage extends MVCApplication
     private static final int VALUE_INPUT_FILE_NOT_FOUND = -1;
     private static final int VALUE_OUTPUT_FILE_EXISTS = 0;
     private static final int VALUE_SUCCESS = 1;
-    
+
     // Session variable to store working values
     private Site _site;
-    
-    
+
     @View( value = VIEW_MANAGE_SITES, defaultView = true )
     public XPage getManageSites( HttpServletRequest request )
     {
         _site = null;
-        Map<String, Object> model = getModel(  );
-        model.put( MARK_SITE_LIST, SiteHome.getSitesList(  ) );
+        Map<String, Object> model = getModel( );
+        model.put( MARK_SITE_LIST, SiteHome.getSitesList( ) );
 
-        return getXPage( TEMPLATE_MANAGE_SITES, request.getLocale(  ), model );
+        return getXPage( TEMPLATE_MANAGE_SITES, request.getLocale( ), model );
     }
-    
-    
+
     /**
      * Returns the infos about a site
      *
-     * @param request The Http request
+     * @param request
+     *            The Http request
      * @return The HTML page to display infos
      */
     @View( VIEW_DETAILS_SITE )
@@ -141,83 +139,85 @@ public class SiteXPage extends MVCApplication
 
         Collection<Dependency> dependencyList = DependencyHome.getDependencysListBySiteId( nId );
         Map<String, String> listRelease = new HashMap<>( );
-        
-        for ( Dependency list : dependencyList)
+
+        for ( Dependency list : dependencyList )
         {
-        	Tools tools = ToolsHome.findByArtifactId( list.getArtifactId( ) );
-        	if ( tools != null )
-        		listRelease.put( tools.getArtifactId( ) , tools.getLastRelease( ));
+            Tools tools = ToolsHome.findByArtifactId( list.getArtifactId( ) );
+            if ( tools != null )
+                listRelease.put( tools.getArtifactId( ), tools.getLastRelease( ) );
         }
-        
-        if ( _site == null  || ( _site.getId( ) != nId ) )
+
+        if ( _site == null || ( _site.getId( ) != nId ) )
         {
             _site = SiteHome.findByPrimaryKey( nId );
         }
-        
+
         int nMonths = TimeInterval.getMonthDiff( _site.getLastUpdate( ) );
-        
-        Map<String, Object> model = getModel(  );
+
+        Map<String, Object> model = getModel( );
         model.put( MARK_SITE, _site );
         model.put( MARK_DEPENDENCY_LIST_BY_SITE, dependencyList );
         model.put( MARK_LAST_RELEASE_LIST, listRelease );
         model.put( MARK_LAST_UPDATE_TIME_INTERVAL, nMonths );
-        
-        return getXPage( TEMPLATE_DETAILS_SITE, request.getLocale(  ), model );
+
+        return getXPage( TEMPLATE_DETAILS_SITE, request.getLocale( ), model );
     }
-    
-    
+
     /**
      * Returns the infos about all sites ranked by artifactId
      *
-     * @param request The Http request
+     * @param request
+     *            The Http request
      * @return The HTML page to display infos
      */
     @Action( ACTION_SEARCH_SITES_BY_ARTIFACT_ID )
     public XPage doSearchArtifactId( HttpServletRequest request )
     {
-        String strArtifactId = request.getParameter( PARAMETER_ARTIFACT_ID_SITE ).toLowerCase( ) ;
+        String strArtifactId = request.getParameter( PARAMETER_ARTIFACT_ID_SITE ).toLowerCase( );
         Collection<Site> siteList = SiteHome.getSitesListByArtifactId( strArtifactId );
 
         if ( !siteList.isEmpty( ) )
         {
-        	Map<String, Object> model = getModel(  );
-        	model.put( MARK_SITE_LIST_BY_ARTIFACT_ID, siteList );
-        
-        	return getXPage( TEMPLATE_MANAGE_SITES, request.getLocale(  ), model );
+            Map<String, Object> model = getModel( );
+            model.put( MARK_SITE_LIST_BY_ARTIFACT_ID, siteList );
+
+            return getXPage( TEMPLATE_MANAGE_SITES, request.getLocale( ), model );
         }
         addError( ERROR_NOT_FOUND, getLocale( request ) );
 
         return redirectView( request, VIEW_MANAGE_SITES );
     }
-    
+
     /**
      * Returns the infos about all sites ranked by name
      *
-     * @param request The Http request
+     * @param request
+     *            The Http request
      * @return The HTML page to display infos
      */
     @Action( ACTION_SEARCH_SITES_BY_NAME )
     public XPage doSearchName( HttpServletRequest request )
     {
-        String strName = request.getParameter( PARAMETER_NAME_SITE ).toLowerCase( ) ;
+        String strName = request.getParameter( PARAMETER_NAME_SITE ).toLowerCase( );
         Collection<Site> siteList = SiteHome.getSitesListByName( strName );
 
         if ( !siteList.isEmpty( ) )
         {
-        	Map<String, Object> model = getModel(  );
-        	model.put( MARK_SITE_LIST_BY_NAME, siteList );
-        
-        	return getXPage( TEMPLATE_MANAGE_SITES, request.getLocale(  ), model );
+            Map<String, Object> model = getModel( );
+            model.put( MARK_SITE_LIST_BY_NAME, siteList );
+
+            return getXPage( TEMPLATE_MANAGE_SITES, request.getLocale( ), model );
         }
         addError( ERROR_NOT_FOUND, getLocale( request ) );
 
         return redirectView( request, VIEW_MANAGE_SITES );
     }
-    
+
     /**
      * Returns the infos about all sites ranked by version
      *
-     * @param request The Http request
+     * @param request
+     *            The Http request
      * @return The HTML page to display infos
      */
     @Action( ACTION_SEARCH_SITES_BY_VERSION )
@@ -227,21 +227,22 @@ public class SiteXPage extends MVCApplication
         Collection<Site> siteList = SiteHome.getSitesListByVersion( strVersion );
 
         if ( !siteList.isEmpty( ) )
-        { 
-        	Map<String, Object> model = getModel(  );
-        	model.put( MARK_SITE_LIST_BY_VERSION, siteList );
-        
-        	return getXPage( TEMPLATE_MANAGE_SITES, request.getLocale(  ), model );
+        {
+            Map<String, Object> model = getModel( );
+            model.put( MARK_SITE_LIST_BY_VERSION, siteList );
+
+            return getXPage( TEMPLATE_MANAGE_SITES, request.getLocale( ), model );
         }
         addError( ERROR_NOT_FOUND, getLocale( request ) );
 
         return redirectView( request, VIEW_MANAGE_SITES );
     }
-    
+
     /**
      * Returns the infos about all sites ranked by last update
      *
-     * @param request The Http request
+     * @param request
+     *            The Http request
      * @return The HTML page to display infos
      */
     @Action( ACTION_SEARCH_SITES_BY_LAST_UPDATE )
@@ -251,49 +252,53 @@ public class SiteXPage extends MVCApplication
         Collection<Site> siteList = SiteHome.getSitesListByLastUpdate( strLastUpdate );
 
         if ( !siteList.isEmpty( ) )
-        { 
-        	Map<String, Object> model = getModel(  );
-        	model.put( MARK_SITE_LIST_BY_LAST_UPDATE, siteList );
-        
-        	return getXPage( TEMPLATE_MANAGE_SITES, request.getLocale(  ), model );
+        {
+            Map<String, Object> model = getModel( );
+            model.put( MARK_SITE_LIST_BY_LAST_UPDATE, siteList );
+
+            return getXPage( TEMPLATE_MANAGE_SITES, request.getLocale( ), model );
         }
         addError( ERROR_NOT_FOUND, getLocale( request ) );
 
         return redirectView( request, VIEW_MANAGE_SITES );
     }
-    
+
     /**
      * Download a pom
      *
-     * @param request The Http request
+     * @param request
+     *            The Http request
      * @return The HTML page to display infos
      */
     @Action( ACTION_DOWNLOAD_POM )
     public XPage doDownloadPom( HttpServletRequest request )
     {
-    	String strId = request.getParameter( PARAMETER_ID_SITE );
-     	Site site = SiteHome.findByPrimaryKey( Integer.parseInt( strId ) );
-    	String fileInputPath = site.getPath( );
-    	Global._strFileChooserPath = "";
-    	Integer nReturn = FileDownloader.updateAndDownload( fileInputPath );
-    	
-    	if ( nReturn == VALUE_INPUT_FILE_NOT_FOUND )
-    	{
-    		addError( ERROR_FILE_NOT_FOUND, getLocale( request ) );
-    	}
-    	else if ( nReturn == VALUE_OUTPUT_FILE_EXISTS )
-    	{
-    		addError( ERROR_FILE_EXISTS, getLocale( request ) );
-    	}
-    	else if ( nReturn == VALUE_NO_SUCH_DIRECTORY )
-    	{
-    		addError( ERROR_DIR_NOT_FOUND, getLocale( request ) );
-    	}
-    	else if ( nReturn == VALUE_SUCCESS )
-    	{
-    		addInfo( INFO_FILE_DOWNLOADED, getLocale( request ) );
-    	}
-        
+        String strId = request.getParameter( PARAMETER_ID_SITE );
+        Site site = SiteHome.findByPrimaryKey( Integer.parseInt( strId ) );
+        String fileInputPath = site.getPath( );
+        Global._strFileChooserPath = "";
+        Integer nReturn = FileDownloader.updateAndDownload( fileInputPath );
+
+        if ( nReturn == VALUE_INPUT_FILE_NOT_FOUND )
+        {
+            addError( ERROR_FILE_NOT_FOUND, getLocale( request ) );
+        }
+        else
+            if ( nReturn == VALUE_OUTPUT_FILE_EXISTS )
+            {
+                addError( ERROR_FILE_EXISTS, getLocale( request ) );
+            }
+            else
+                if ( nReturn == VALUE_NO_SUCH_DIRECTORY )
+                {
+                    addError( ERROR_DIR_NOT_FOUND, getLocale( request ) );
+                }
+                else
+                    if ( nReturn == VALUE_SUCCESS )
+                    {
+                        addInfo( INFO_FILE_DOWNLOADED, getLocale( request ) );
+                    }
+
         return redirectView( request, VIEW_DETAILS_SITE.concat( "&" ).concat( PARAMETER_ID_SITE ).concat( "=" ).concat( strId ) );
     }
 }

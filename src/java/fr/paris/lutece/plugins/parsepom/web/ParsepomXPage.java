@@ -55,25 +55,24 @@ import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
-
 /**
  * This class provides the user interface to manage Parsepom xpages.
  */
- 
-@Controller( xpageName = "parsepom" , pageTitleI18nKey = "parsepom.xpage.parsepom.pageTitle" , pagePathI18nKey = "parsepom.xpage.parsepom.pagePathLabel" )
+
+@Controller( xpageName = "parsepom", pageTitleI18nKey = "parsepom.xpage.parsepom.pageTitle", pagePathI18nKey = "parsepom.xpage.parsepom.pagePathLabel" )
 public class ParsepomXPage extends MVCApplication
 {
     /**
 	 * 
 	 */
-	private static final long serialVersionUID = 1L;
-	
-	// Templates
-    private static final String TEMPLATE_PARSEPOM="/skin/plugins/parsepom/manage_parsepom.html";
-    private static final String TEMPLATE_VALIDATE="/skin/plugins/parsepom/validate_parse.html";
-    
+    private static final long serialVersionUID = 1L;
+
+    // Templates
+    private static final String TEMPLATE_PARSEPOM = "/skin/plugins/parsepom/manage_parsepom.html";
+    private static final String TEMPLATE_VALIDATE = "/skin/plugins/parsepom/validate_parse.html";
+
     // Markers
-    private static final String MARK_DATA_EXIST="exist";
+    private static final String MARK_DATA_EXIST = "exist";
     private static final String MARK_PARSE = "parse";
     private static final String MARK_PATH = "path";
     private static final String MARK_CONFLICT = "conflict";
@@ -81,21 +80,21 @@ public class ParsepomXPage extends MVCApplication
     private static final String MARK_NB_SITES = "nbSites";
     private static final String MARK_NB_DEPENDENCIES = "nbDependencies";
     private static final String MARK_INVALID_POM_PATH = "listInvalidPomPath";
-	
-	// Views
+
+    // Views
     private static final String VIEW_PARSEPOM = "parsepom";
     private static final String VIEW_VALIDATE = "validate";
-    
+
     // Actions
     private static final String ACTION_UPDATE = "update";
     private static final String ACTION_CHOOSE = "choose";
     private static final String ACTION_PARSE = "parse";
     private static final String ACTION_VALIDATE = "validate";
     private static final String ACTION_CLEAN = "clean";
-    
+
     // Parameters
     private static final String PARAMETER_PATH = "path";
-    
+
     // Infos
     private static final String INFO_TOOLS_UPDATED = "parsepom.info.tools.updated";
     private static final String ERROR_PATH_NOT_FOUND = "parsepom.error.path.notFound";
@@ -106,92 +105,95 @@ public class ParsepomXPage extends MVCApplication
     // Session variable to store working values
     private String path = "";
     private Extract ext = new Extract( );
-    
-    
+
     /**
      * Returns the page home.
-     * @param request The HTTP request
+     * 
+     * @param request
+     *            The HTTP request
      * @return The view
      */
-	@View( value = VIEW_PARSEPOM, defaultView = true )
+    @View( value = VIEW_PARSEPOM, defaultView = true )
     public XPage getManageSites( HttpServletRequest request )
     {
-		Collection<Site> siteList = SiteHome.getSitesList(  );
-		Collection<Dependency> dependencyList = DependencyHome.getDependencysListWithoutDuplicates(  );
-		
-		if (!siteList.isEmpty( ) && !dependencyList.isEmpty( ))
-		{
-			Global._boolNotEmptyDB = true;
-		}
-		else
-		{
-			Global._boolNotEmptyDB = false;
-		}
-		
-		Integer nSites = 0;
-		for ( nSites = 0; nSites < siteList.size( ); nSites++ )
-		{
-		}
-		
-		Integer nDependencies = 0;
-		for ( nDependencies = 0; nDependencies < dependencyList.size( ); nDependencies++ )
-		{
-		}
-		
-        Map<String, Object> model = getModel(  );
+        Collection<Site> siteList = SiteHome.getSitesList( );
+        Collection<Dependency> dependencyList = DependencyHome.getDependencysListWithoutDuplicates( );
+
+        if ( !siteList.isEmpty( ) && !dependencyList.isEmpty( ) )
+        {
+            Global._boolNotEmptyDB = true;
+        }
+        else
+        {
+            Global._boolNotEmptyDB = false;
+        }
+
+        Integer nSites = 0;
+        for ( nSites = 0; nSites < siteList.size( ); nSites++ )
+        {
+        }
+
+        Integer nDependencies = 0;
+        for ( nDependencies = 0; nDependencies < dependencyList.size( ); nDependencies++ )
+        {
+        }
+
+        Map<String, Object> model = getModel( );
         model.put( MARK_DATA_EXIST, Global._boolNotEmptyDB );
-        model.put( MARK_PATH, path);
-        model.put( MARK_NB_SITES, nSites);
-        model.put( MARK_NB_DEPENDENCIES, nDependencies);
-        
-        return getXPage( TEMPLATE_PARSEPOM, request.getLocale(  ), model );
+        model.put( MARK_PATH, path );
+        model.put( MARK_NB_SITES, nSites );
+        model.put( MARK_NB_DEPENDENCIES, nDependencies );
+
+        return getXPage( TEMPLATE_PARSEPOM, request.getLocale( ), model );
     }
-	
-	/**
+
+    /**
      * Update the last releases"
-     * @param request The HTTP request
+     * 
+     * @param request
+     *            The HTTP request
      * @return The view
      */
-	@Action( value = ACTION_UPDATE )
-	public XPage doUpdate( HttpServletRequest request )
-	{
-		Collection<Dependency> dependencyList = DependencyHome.getDependencysListWithoutDuplicates( );
-    	HttpProcess.getLastReleases( dependencyList );
-    	
-    	Map<String, Object> model = getModel(  );
+    @Action( value = ACTION_UPDATE )
+    public XPage doUpdate( HttpServletRequest request )
+    {
+        Collection<Dependency> dependencyList = DependencyHome.getDependencysListWithoutDuplicates( );
+        HttpProcess.getLastReleases( dependencyList );
+
+        Map<String, Object> model = getModel( );
         model.put( MARK_DATA_EXIST, Global._boolNotEmptyDB );
-    	
-    	addInfo( INFO_TOOLS_UPDATED, getLocale( request ) );
-    	
-    	return redirectView( request, VIEW_PARSEPOM );
-	}
-	
-	/**
+
+        addInfo( INFO_TOOLS_UPDATED, getLocale( request ) );
+
+        return redirectView( request, VIEW_PARSEPOM );
+    }
+
+    /**
      * 
      * @param request
      * @return XPage
      */
     @Action( ACTION_CHOOSE )
     public XPage doChoose( HttpServletRequest request )
-    {		
-    	path = FileChooser.chooserDir( );
-    	
-    	return redirectView( request, VIEW_PARSEPOM );
+    {
+        path = FileChooser.chooserDir( );
+
+        return redirectView( request, VIEW_PARSEPOM );
     }
-    
-    @View( value = VIEW_VALIDATE)
+
+    @View( value = VIEW_VALIDATE )
     public XPage getValidate( HttpServletRequest request )
     {
-    	Map<String, Object> model = getModel(  );
+        Map<String, Object> model = getModel( );
 
-    	model.put( MARK_INVALID_POM_PATH, Global._listInvalidPomPath );
-    	model.put( MARK_PARSE, path );
-    	model.put( MARK_CONFLICT, ext.getConflict( ) );
-    	model.put( MARK_ALLSITE, ext.getGlobaleSite( ) );
+        model.put( MARK_INVALID_POM_PATH, Global._listInvalidPomPath );
+        model.put( MARK_PARSE, path );
+        model.put( MARK_CONFLICT, ext.getConflict( ) );
+        model.put( MARK_ALLSITE, ext.getGlobaleSite( ) );
 
         return getXPage( TEMPLATE_VALIDATE, request.getLocale( ), model );
     }
-    
+
     /**
      * 
      * @param request
@@ -199,86 +201,86 @@ public class ParsepomXPage extends MVCApplication
      */
     @Action( ACTION_PARSE )
     public XPage doParse( HttpServletRequest request )
-    {		
-    	path = request.getParameter( PARAMETER_PATH );
-		
-    	Global._strFileChooserPath = path;
-    	
-    	FileFilter filter = new Extract.DirFilter( );
-    	File dirs = new File( path );
-    	ext.initMaxInt( );
-    	if ( !dirs.isDirectory( ) )
-	    {
-    		addError( ERROR_PATH_NOT_FOUND, getLocale( request ) );
-    		path = "";
-    		return redirectView( request, VIEW_PARSEPOM );
-	    }
+    {
+        path = request.getParameter( PARAMETER_PATH );
 
-    	ext.openDir( dirs, filter );
-    	
-    	if ( ext.getConflict( ).isEmpty( ) && ext.getGlobaleSite( ).isEmpty( ) )
- 	    {
-    		addInfo( INFO_VALIDATE_UPTODATE, getLocale( request ) );
-    		path = "";
-    		return redirectView( request, VIEW_PARSEPOM );
- 	    }
-		
-    	return redirectView( request, VIEW_VALIDATE );
+        Global._strFileChooserPath = path;
+
+        FileFilter filter = new Extract.DirFilter( );
+        File dirs = new File( path );
+        ext.initMaxInt( );
+        if ( !dirs.isDirectory( ) )
+        {
+            addError( ERROR_PATH_NOT_FOUND, getLocale( request ) );
+            path = "";
+            return redirectView( request, VIEW_PARSEPOM );
+        }
+
+        ext.openDir( dirs, filter );
+
+        if ( ext.getConflict( ).isEmpty( ) && ext.getGlobaleSite( ).isEmpty( ) )
+        {
+            addInfo( INFO_VALIDATE_UPTODATE, getLocale( request ) );
+            path = "";
+            return redirectView( request, VIEW_PARSEPOM );
+        }
+
+        return redirectView( request, VIEW_VALIDATE );
     }
-    
+
     @Action( ACTION_VALIDATE )
     public XPage doValidate( HttpServletRequest request )
     {
-    	Collection<Site> _globaleSites  = ext.getGlobaleSite( );
-    	Collection<Site> _conflict =  ext.getConflict( );
-	        
-    	Iterator<Site> itSite;
-    	Iterator<Site> itConflict;
-		if ( !_conflict.isEmpty( ) )
-		{
-			itConflict = _conflict.iterator( );
-			while ( itConflict.hasNext( ) )
-			{
-				Site siteConflict = itConflict.next( );
-				ext.conflictSite(  siteConflict ) ;
+        Collection<Site> _globaleSites = ext.getGlobaleSite( );
+        Collection<Site> _conflict = ext.getConflict( );
 
-				itConflict.remove( );
-			}
-		}
-		itSite = _globaleSites.iterator( );
-		while ( itSite.hasNext( ) )
-		{
-			Site currentSite = itSite.next( );
-			if ( !currentSite.getIdPlugins( ).isEmpty( ) )
-			{
-				ext.createSite( currentSite );
-			}
-			itSite.remove( );
-	    }
-		path = "";
-		
-		Collection<Dependency> dependencyList = DependencyHome.getDependencysListWithoutDuplicates( );
-    	HttpProcess.getLastReleases( dependencyList );
-		
-    	addInfo( INFO_VALIDATE, getLocale( request ) );
-    	
-    	return redirectView( request, VIEW_PARSEPOM );
+        Iterator<Site> itSite;
+        Iterator<Site> itConflict;
+        if ( !_conflict.isEmpty( ) )
+        {
+            itConflict = _conflict.iterator( );
+            while ( itConflict.hasNext( ) )
+            {
+                Site siteConflict = itConflict.next( );
+                ext.conflictSite( siteConflict );
+
+                itConflict.remove( );
+            }
+        }
+        itSite = _globaleSites.iterator( );
+        while ( itSite.hasNext( ) )
+        {
+            Site currentSite = itSite.next( );
+            if ( !currentSite.getIdPlugins( ).isEmpty( ) )
+            {
+                ext.createSite( currentSite );
+            }
+            itSite.remove( );
+        }
+        path = "";
+
+        Collection<Dependency> dependencyList = DependencyHome.getDependencysListWithoutDuplicates( );
+        HttpProcess.getLastReleases( dependencyList );
+
+        addInfo( INFO_VALIDATE, getLocale( request ) );
+
+        return redirectView( request, VIEW_PARSEPOM );
     }
-   
+
     /*
      * Cancel parsing of all pom.xml file
      */
     @Action( ACTION_CLEAN )
     public XPage doClean( HttpServletRequest request )
     {
-		ext.setConflictClear( );
-		ext.setGlobaleDepClear( );
-		ext.setGlobaleSiteClear( );
-		
-		path = "";
-		
-		addInfo( INFO_CANCEL, getLocale( request ) );
-		
-		return redirectView( request, VIEW_PARSEPOM );
-	}
+        ext.setConflictClear( );
+        ext.setGlobaleDepClear( );
+        ext.setGlobaleSiteClear( );
+
+        path = "";
+
+        addInfo( INFO_CANCEL, getLocale( request ) );
+
+        return redirectView( request, VIEW_PARSEPOM );
+    }
 }

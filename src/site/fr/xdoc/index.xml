@@ -11,13 +11,15 @@
             </p>
             -->
             <subsection name="Introduction">
-                <p></p>
-            </subsection>
-            <subsection name="Configuration">
-                <p></p>
-            </subsection>
-            <subsection name="Usage">
-                <p></p>
+                <p>
+                    Ce plugin construit une liste de sites trouvés à un noeud donné d'un système de fichiers.
+                    Il analyse tous les pom.xml trouvés pour extraire des composants (plugins, modules, ...).
+                    Pour chaque plugin, il affiche la version actuelle et la dernière version disponible.
+                </p>
+                <p>
+                    Le plugin fournit également la liste de tous les composants trouvés dans tous les sites et
+                    indique dans quel site il est utilisé et dans quelle version.
+                </p>
             </subsection>
         </section>
     </body>
